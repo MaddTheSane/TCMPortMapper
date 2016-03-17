@@ -13,13 +13,13 @@
  *                 the notification center.
  */
 void _IXSCNotificationCallback( SCDynamicStoreRef store, CFArrayRef changedKeys, void *info ) {	
-	NSEnumerator *keysE = [(NSArray *)changedKeys objectEnumerator];
+	NSEnumerator *keysE = [(NSArray *)CFBridgingRelease(changedKeys) objectEnumerator];
 	NSString *key = nil;
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	while ( key = [keysE nextObject] ) {		
 		[nc postNotificationName:key 
-							object:(id)info 
-						  userInfo:[(NSDictionary *)SCDynamicStoreCopyValue(store, (CFStringRef) key) autorelease]];
+							object:(id)CFBridgingRelease(info) 
+						  userInfo:(NSDictionary *)CFBridgingRelease(SCDynamicStoreCopyValue(store, (CFStringRef) key))];
 	}
 }
 
@@ -39,7 +39,7 @@ void _IXSCNotificationCallback( SCDynamicStoreRef store, CFArrayRef changedKeys,
 - (id)init {
 	self = [super init];
 	if ( self ) {
-		SCDynamicStoreContext context = { 0, (void *)self, NULL, NULL, NULL };
+		SCDynamicStoreContext context = { 0, (__bridge void *)self, NULL, NULL, NULL };
 		
 		dynStore = SCDynamicStoreCreate(
 			NULL, 
@@ -62,7 +62,6 @@ void _IXSCNotificationCallback( SCDynamicStoreRef store, CFArrayRef changedKeys,
 	CFRelease(rlSrc);
 	CFRelease(dynStore);
 
-	[super dealloc];
 }
 
 @end

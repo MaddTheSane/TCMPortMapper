@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- Copyright © 2005 Apple Computer, Inc., All Rights Reserved
+ Copyright ï¿½ 2005 Apple Computer, Inc., All Rights Reserved
  */ 
 
 #import <Foundation/Foundation.h>
@@ -74,7 +74,9 @@ typedef enum {
 - (void)setDomain:(NSString *)value;
 
 - (NSString *)name;
-- (void)setName:(NSString *)value;
+
+//- (void)setName:(NSString *)value;
+- (void)setTcpServerName:(NSString *)value;
 
 - (NSString *)type;
 - (void)setType:(NSString *)value;

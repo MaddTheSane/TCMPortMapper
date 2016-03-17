@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- Copyright © 2005 Apple Computer, Inc., All Rights Reserved
+ Copyright ï¿½ 2005 Apple Computer, Inc., All Rights Reserved
  */ 
 
 #import "TCPServer.h"
@@ -88,7 +88,9 @@ NSString * const TCPServerErrorDomain = @"TCPServerErrorDomain";
     return name;
 }
 
-- (void)setName:(NSString *)value {
+
+//- (void)setName:(NSString *)value {
+- (void)setTcpServerName:(NSString *)value {
     if (name != value) {
         [name release];
         name = [value copy];

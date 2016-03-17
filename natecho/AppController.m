@@ -41,7 +41,8 @@
 
     I_server = [TCPServer new];
     [I_server setType:@"_echo._tcp."];
-    [I_server setName:@"NATEcho"];
+    //[I_server setName:@"NATEcho"];
+    [I_server setTcpServerName:@"NATEcho"];
     [I_server setDelegate:self];
     I_streamsArray = [NSMutableArray new];
 }
