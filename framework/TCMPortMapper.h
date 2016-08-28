@@ -29,17 +29,17 @@ extern NSString * const TCMNATPMPPortMapProtocol;
 extern NSString * const TCMUPNPPortMapProtocol;  
 extern NSString * const TCMNoPortMapProtocol;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, TCMPortMappingStatus) {
     TCMPortMappingStatusUnmapped = 0,
     TCMPortMappingStatusTrying   = 1,
     TCMPortMappingStatusMapped   = 2
-} TCMPortMappingStatus;
+};
 
-typedef enum {
+typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
     TCMPortMappingTransportProtocolUDP  = 1,
     TCMPortMappingTransportProtocolTCP  = 2,
     TCMPortMappingTransportProtocolBoth = 3
-} TCMPortMappingTransportProtocol;
+};
 
 
 @interface TCMPortMapping : NSObject {
@@ -50,17 +50,14 @@ typedef enum {
     TCMPortMappingStatus _mappingStatus;
     TCMPortMappingTransportProtocol _transportProtocol;
 }
-+ (id)portMappingWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(int)aTransportProtocol userInfo:(id)aUserInfo;
-- (id)initWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(int)aTransportProtocol userInfo:(id)aUserInfo;
-- (int)desiredExternalPort;
-- (id)userInfo;
-- (TCMPortMappingStatus)mappingStatus;
-- (void)setMappingStatus:(TCMPortMappingStatus)aStatus;
-- (TCMPortMappingTransportProtocol)transportProtocol;
-- (void)setTransportProtocol:(TCMPortMappingTransportProtocol)aProtocol;
-- (void)setExternalPort:(int)aPublicPort;
-- (int)externalPort;
-- (int)localPort;
++ (instancetype)portMappingWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(id)aUserInfo;
+- (instancetype)initWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(id)aUserInfo;
+@property (readonly) int desiredExternalPort;
+@property (readonly, retain) id userInfo;
+@property (nonatomic) TCMPortMappingStatus mappingStatus;
+@property (nonatomic) TCMPortMappingTransportProtocol transportProtocol;
+@property (nonatomic) int externalPort;
+@property (readonly) int localPort;
 
 @end
 
@@ -95,41 +92,38 @@ typedef enum {
 + (NSString *)manufacturerForHardwareAddress:(NSString *)aMACAddress;
 + (NSString *)sizereducableHashOfString:(NSString *)inString;
 
-- (NSSet *)portMappings;
+@property (readonly, copy) NSSet<TCMPortMapping*> *portMappings;
 - (NSMutableSet *)removeMappingQueue;
 - (void)addPortMapping:(TCMPortMapping *)aMapping;
 - (void)removePortMapping:(TCMPortMapping *)aMapping;
 - (void)refresh;
 
-- (BOOL)isAtWork;
-- (BOOL)isRunning;
+@property (readonly, getter=isAtWork) BOOL atWork;
+@property (readonly, getter=isRunning) BOOL running;
 - (void)start;
 - (void)stop;
 - (void)stopBlocking;
 
 @property (strong) NSString *appIdentifier;
 
-// will request the complete UPNPMappingTable and deliver it using a TCMPortMapperDidReceiveUPNPMappingTableNotification with "mappingTable" in the userInfo Dictionary (if current router is a UPNP router)
+/// will request the complete UPNPMappingTable and deliver it using a TCMPortMapperDidReceiveUPNPMappingTableNotification with "mappingTable" in the userInfo Dictionary (if current router is a UPNP router)
 - (void)requestUPNPMappingTable;
-// this is mainly for Port Map.app and can remove any mappings that can be removed using UPNP (including mappings from other hosts). aMappingList is an Array of Dictionaries with the key @"protocol" and @"publicPort".
+/// this is mainly for Port Map.app and can remove any mappings that can be removed using UPNP (including mappings from other hosts). aMappingList is an Array of Dictionaries with the key @"protocol" and @"publicPort".
 - (void)removeUPNPMappings:(NSArray *)aMappingList;
 
-// needed for generating a UPNP port mapping description that differs for each user
-- (NSString *)userID;
-- (void)setUserID:(NSString *)aUserID;
-// we provide a half length md5 has for convenience
-// we could use full length but the description field of the routers might be limited
+/// needed for generating a UPNP port mapping description that differs for each user
+@property (nonatomic, copy) NSString *userID;
+/// we provide a half length md5 has for convenience
+/// we could use full length but the description field of the routers might be limited
 - (void)hashUserID:(NSString *)aUserIDToHash;
 
-- (NSString *)externalIPAddress;
-- (NSString *)localIPAddress;
-- (NSString *)localBonjourHostName;
-- (void)setMappingProtocol:(NSString *)aProtocol;
-- (NSString *)mappingProtocol;
-- (void)setRouterName:(NSString *)aRouterName;
-- (NSString *)routerName;
-- (NSString *)routerIPAddress;
-- (NSString *)routerHardwareAddress;
+@property (readonly, copy) NSString *externalIPAddress;
+@property (readonly, copy) NSString *localIPAddress;
+@property (readonly, copy) NSString *localBonjourHostName;
+@property (nonatomic, copy) NSString *mappingProtocol;
+@property (nonatomic, copy) NSString *routerName;
+@property (readonly, copy) NSString *routerIPAddress;
+@property (readonly, copy) NSString *routerHardwareAddress;
 
 // private accessors
 - (NSMutableSet *)_upnpPortMappingsToRemove;
