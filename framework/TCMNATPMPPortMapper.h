@@ -9,7 +9,7 @@
 
 #import "TCMPortMapper.h"
 
-#import "natpmp.h"
+#include "natpmp.h"
 
 extern NSString * const TCMNATPMPPortMapperDidFailNotification;
 extern NSString * const TCMNATPMPPortMapperDidGetExternalIPAddressNotification;
@@ -17,10 +17,10 @@ extern NSString * const TCMNATPMPPortMapperDidBeginWorkingNotification;
 extern NSString * const TCMNATPMPPortMapperDidEndWorkingNotification  ;
 extern NSString * const TCMNATPMPPortMapperDidReceiveBroadcastedExternalIPChangeNotification;
 
-typedef enum {
+typedef NS_ENUM(char, TCMPortMappingThreadID) {
     TCMExternalIPThreadID = 0,
     TCMUpdatingMappingThreadID = 1,
-} TCMPortMappingThreadID;
+};
 
 @interface TCMNATPMPPortMapper : NSObject {
     NSLock *natPMPThreadIsRunningLock;

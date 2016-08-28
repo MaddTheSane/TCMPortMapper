@@ -8,9 +8,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <errno.h>
-#import <string.h>
-#import <unistd.h>
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
 
 extern NSString * const TCMPortMapperExternalIPAddressDidChange;
 
@@ -55,21 +55,15 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 @property (readonly) int desiredExternalPort;
 @property (readonly, retain) id userInfo;
 @property (nonatomic) TCMPortMappingStatus mappingStatus;
-@property (nonatomic) TCMPortMappingTransportProtocol transportProtocol;
-@property (nonatomic) int externalPort;
+@property TCMPortMappingTransportProtocol transportProtocol;
+@property int externalPort;
 @property (readonly) int localPort;
 
 @end
 
-@class IXSCNotificationManager;
-@class TCMNATPMPPortMapper;
-@class TCMUPNPPortMapper;
 @interface TCMPortMapper : NSObject {
-    TCMNATPMPPortMapper *_NATPMPPortMapper;
-    TCMUPNPPortMapper *_UPNPPortMapper;
     NSMutableSet *_portMappings;
     NSMutableSet *_removeMappingQueue;
-    IXSCNotificationManager *_systemConfigNotificationManager;
     BOOL _isRunning;
     NSString *_localIPAddress;
     NSString *_externalIPAddress;
@@ -107,7 +101,7 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 - (void)stop;
 - (void)stopBlocking;
 
-@property (nonatomic, strong) NSString *appIdentifier;
+@property (nonatomic, copy) NSString *appIdentifier;
 
 /// will request the complete UPNPMappingTable and deliver it using a TCMPortMapperDidReceiveUPNPMappingTableNotification with "mappingTable" in the userInfo Dictionary (if current router is a UPNP router)
 - (void)requestUPNPMappingTable;
@@ -123,8 +117,8 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 @property (readonly, copy) NSString *externalIPAddress;
 @property (readonly, copy) NSString *localIPAddress;
 @property (readonly, copy) NSString *localBonjourHostName;
-@property (nonatomic, copy) NSString *mappingProtocol;
-@property (nonatomic, copy) NSString *routerName;
+@property (copy) NSString *mappingProtocol;
+@property (copy) NSString *routerName;
 @property (readonly, copy) NSString *routerIPAddress;
 @property (readonly, copy) NSString *routerHardwareAddress;
 

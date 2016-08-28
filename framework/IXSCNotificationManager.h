@@ -5,7 +5,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <SystemConfiguration/SystemConfiguration.h>
+#include <SystemConfiguration/SystemConfiguration.h>
 
 
 /*!

@@ -4,23 +4,18 @@
 #import "TCMUPNPPortMapper.h"
 #import "IXSCNotificationManager.h"
 #import "NSNotificationCenterThreadingAdditions.h"
-#import <SystemConfiguration/SystemConfiguration.h>
-#import <SystemConfiguration/SCSchemaDefinitions.h>
-#import <sys/sysctl.h> 
-#import <netinet/in.h>
-#import <arpa/inet.h>
-#import <net/route.h>
-#import <netinet/if_ether.h>
-#import <net/if_dl.h>
+#include <SystemConfiguration/SystemConfiguration.h>
+#include <SystemConfiguration/SCSchemaDefinitions.h>
+#include <sys/sysctl.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <net/route.h>
+#include <netinet/if_ether.h>
+#include <net/if_dl.h>
 
-// openssl is deprecated on OS X 10.7+
-#ifdef USE_OPENSSL
-#import <openssl/md5.h>
-#else
-#import <CommonCrypto/CommonDigest.h>
-#endif
+#include <CommonCrypto/CommonDigest.h>
 
-#import <err.h>
+#include <err.h>
 
 static void CopySerialNumber(CFStringRef *serialNumber);
 
@@ -79,6 +74,11 @@ enum {
 
 
 @implementation TCMPortMapping 
+@synthesize desiredExternalPort = _desiredExternalPort;
+@synthesize mappingStatus = _mappingStatus;
+@synthesize userInfo = _userInfo;
+@synthesize externalPort = _externalPort;
+@synthesize localPort = _localPort;
 
 + (id)portMappingWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(id)aUserInfo {
     NSAssert(aPrivatePort<65536 && aPublicPort<65536 && aPrivatePort>0 && aPublicPort>0, @"Port number has to be between 1 and 65535");
@@ -96,19 +96,6 @@ enum {
 }
 
 
-- (int)desiredExternalPort {
-    return _desiredExternalPort;
-}
-
-
-- (id)userInfo {
-    return _userInfo;
-}
-
-- (TCMPortMappingStatus)mappingStatus {
-    return _mappingStatus;
-}
-
 - (void)setMappingStatus:(TCMPortMappingStatus)aStatus {
     if (_mappingStatus != aStatus) {
         _mappingStatus = aStatus;
@@ -117,31 +104,6 @@ enum {
         }
         [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:TCMPortMappingDidChangeMappingStatusNotification object:self];
     }
-}
-
-- (TCMPortMappingTransportProtocol)transportProtocol {
-    return _transportProtocol;
-}
-
-
-- (void)setTransportProtocol:(TCMPortMappingTransportProtocol)aProtocol {
-    if (_transportProtocol != aProtocol) {
-        _transportProtocol = aProtocol;
-    }
-}
-
-
-- (int)externalPort {
-    return _externalPort;
-}
-
-- (void)setExternalPort:(int)aPublicPort {
-    _externalPort=aPublicPort;
-}
-
-
-- (int)localPort {
-    return _localPort;
 }
 
 - (NSString *)description {
@@ -163,7 +125,11 @@ enum {
 @property (nonatomic, readwrite, copy) NSString *localIPAddress;
 @end
 
-@implementation TCMPortMapper
+@implementation TCMPortMapper {
+    TCMNATPMPPortMapper *_NATPMPPortMapper;
+    TCMUPNPPortMapper *_UPNPPortMapper;
+    IXSCNotificationManager *_systemConfigNotificationManager;
+}
 
 @synthesize appIdentifier = _appIdentifier;
 @synthesize externalIPAddress = _externalIPAddress;
@@ -248,13 +214,9 @@ enum {
     SCNetworkConnectionFlags status = 0;
     char *name = "www.apple.com";
     
-#if MAC_OS_X_VERSION_MIN_REQUIRED == MAC_OS_X_VERSION_10_2
-    success = SCNetworkCheckReachabilityByName(name, &status);
-#else
     SCNetworkReachabilityRef target = SCNetworkReachabilityCreateWithName(NULL, name);
     success = SCNetworkReachabilityGetFlags(target, &status);
     CFRelease(target);
-#endif
     
     okay = success && (status & kSCNetworkFlagsReachable) && !(status & kSCNetworkFlagsConnectionRequired); 
     
@@ -340,11 +302,7 @@ enum {
     int i;
     NSData *dataToHash = [inString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:NO];
 
-#ifdef USE_OPENSSL
-    MD5([dataToHash bytes],[dataToHash length],digest);
-#else
-    CC_MD5([dataToHash bytes], [dataToHash length], digest);
-#endif
+    CC_MD5([dataToHash bytes], (CC_LONG)[dataToHash length], digest);
     
     for(i=0;i<16;i++) [hashstring appendFormat:@"%02x", digest[i]];
     

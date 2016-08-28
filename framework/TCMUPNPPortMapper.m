@@ -1,7 +1,7 @@
 
 #import "TCMUPNPPortMapper.h"
-#import <SystemConfiguration/SystemConfiguration.h>
-#import <SystemConfiguration/SCSchemaDefinitions.h>
+#include <SystemConfiguration/SystemConfiguration.h>
+#include <SystemConfiguration/SCSchemaDefinitions.h>
 #import "NSNotificationCenterThreadingAdditions.h"
 
 #define PREFIX_MATCH_MIN_LENGTH 6
@@ -172,13 +172,9 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
                     Boolean success = 0;
                     const char *name = [[descURL host] UTF8String];
                     
-#if MAC_OS_X_VERSION_MIN_REQUIRED == MAC_OS_X_VERSION_10_2
-                    success = SCNetworkCheckReachabilityByName(name, &status);
-#else
                     SCNetworkReachabilityRef target = SCNetworkReachabilityCreateWithName(NULL, name);
                     success = SCNetworkReachabilityGetFlags(target, &status);
                     CFRelease(target);
-#endif
                     
 #ifndef NDEBUG
                     NSLog(@"UPnP: %@ %c%c%c%c%c%c%c host:%s st:%s",

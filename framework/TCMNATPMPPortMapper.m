@@ -1,13 +1,13 @@
 
 #import "TCMNATPMPPortMapper.h"
 #import "NSNotificationCenterThreadingAdditions.h"
-#import "natpmp.h"
+#include "natpmp.h"
 
-#import <netinet/in.h>
-#import <netinet6/in6.h>
-#import <net/if.h>
-#import <arpa/inet.h>
-#import <sys/socket.h>
+#include <netinet/in.h>
+#include <netinet6/in6.h>
+#include <net/if.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
 
 NSString * const TCMNATPMPPortMapperDidFailNotification = @"TCMNATPMPPortMapperDidFailNotification";
 NSString * const TCMNATPMPPortMapperDidGetExternalIPAddressNotification = @"TCMNATPMPPortMapperDidGetExternalIPAddressNotification";
