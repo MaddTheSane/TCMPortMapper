@@ -10,12 +10,12 @@
 - (id)transformedValue:(id)value {
     if ([value isKindOfClass:[NSNumber class]]) {
         switch([value intValue]) {
-            case 2: return [NSImage imageNamed:@"DotGreen"];
-            case 1: return [NSImage imageNamed:@"DotYellow"];
-            default: return [NSImage imageNamed:@"DotRed"];
+            case 2: return [NSImage imageNamed:NSImageNameStatusAvailable];
+            case 1: return [NSImage imageNamed:NSImageNameStatusPartiallyAvailable];
+            default: return [NSImage imageNamed:NSImageNameStatusUnavailable];
         }
     } else {
-        return [NSImage imageNamed:@"GenericQuestionMarkIcon.icns"];
+        return [NSImage imageNamed:NSImageNameStatusNone];
     }
 }
 @end

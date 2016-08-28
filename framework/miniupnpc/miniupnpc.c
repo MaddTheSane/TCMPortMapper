@@ -124,7 +124,7 @@ getContentLengthAndHeaderLength(char * p, int n,
 		line = line + linelen + 2;
 		if(line[0] == '\r' && line[1] == '\n')
 		{
-			*headerlen = (line - p) + 2;
+			*headerlen = (int)((line - p) + 2);
 			return;
 		}
 	}
@@ -147,7 +147,7 @@ int simpleUPnPcommand(int s, const char * url, const char * service,
 	char soapbody[2048];
 	char * buf;
 	int buffree;
-    int n;
+    ssize_t n;
 	int contentlen, headerlen;	/* for the response */
 	snprintf(soapact, sizeof(soapact), "%s#%s", service, action);
 	if(args==NULL)
@@ -257,7 +257,7 @@ int simpleUPnPcommand(int s, const char * url, const char * service,
 		getContentLengthAndHeaderLength(buffer, *bufsize,
 		                                &contentlen, &headerlen);
 #ifdef DEBUG
-		printf("received n=%dbytes bufsize=%d ContLen=%d HeadLen=%d\n",
+		printf("received n=%zdbytes bufsize=%d ContLen=%d HeadLen=%d\n",
 		       n, *bufsize, contentlen, headerlen);
 #endif
 		/* break if we received everything */
@@ -363,7 +363,7 @@ struct UPNPDev * upnpDiscover(int delay, const char * multicastif,
 	int deviceIndex = 0;
 	char bufr[1536];	/* reception and emission buffer */
 	int sudp;
-	int n;
+	ssize_t n;
 	struct sockaddr_in sockudp_r, sockudp_w;
 
 #ifndef WIN32
@@ -468,7 +468,7 @@ struct UPNPDev * upnpDiscover(int delay, const char * multicastif,
 		const char * st=NULL;
 		int stsize=0;
         /*printf("%d byte(s) :\n%s\n", n, bufr);*/ /* affichage du message */
-		parseMSEARCHReply(bufr, n, &descURL, &urlsize, &st, &stsize);
+		parseMSEARCHReply(bufr, (int)n, &descURL, &urlsize, &st, &stsize);
 		if(st&&descURL)
 		{
 			/*printf("M-SEARCH Reply:\nST: %.*s\nLocation: %.*s\n",
@@ -501,7 +501,7 @@ void freeUPNPDevlist(struct UPNPDev * devlist)
 }
 
 static void
-url_cpy_or_cat(char * dst, const char * src, int n)
+url_cpy_or_cat(char * dst, const char * src, ssize_t n)
 {
 	if(  (src[0] == 'h')
 	   &&(src[1] == 't')
@@ -515,7 +515,7 @@ url_cpy_or_cat(char * dst, const char * src, int n)
 	}
 	else
 	{
-		int l = strlen(dst);
+		ssize_t l = strlen(dst);
 		if(src[0] != '/')
 			dst[l++] = '/';
 		if(l<=n)
@@ -529,7 +529,7 @@ void GetUPNPUrls(struct UPNPUrls * urls, struct IGDdatas * data,
                  const char * descURL)
 {
 	char * p;
-	int n1, n2, n3;
+	ssize_t n1, n2, n3;
 	n1 = strlen(data->urlbase);
 	if(n1==0)
 		n1 = strlen(descURL);
@@ -559,11 +559,11 @@ void GetUPNPUrls(struct UPNPUrls * urls, struct IGDdatas * data,
 	url_cpy_or_cat(urls->controlURL_CIF, data->controlurl_CIF, n3);
 
 #ifdef DEBUG
-	printf("urls->ipcondescURL='%s' %lu n1=%d\n", urls->ipcondescURL,
+	printf("urls->ipcondescURL='%s' %lu n1=%zd\n", urls->ipcondescURL,
 	       (unsigned long)strlen(urls->ipcondescURL), n1);
-	printf("urls->controlURL='%s' %lu n2=%d\n", urls->controlURL,
+	printf("urls->controlURL='%s' %lu n2=%zd\n", urls->controlURL,
 	       (unsigned long)strlen(urls->controlURL), n2);
-	printf("urls->controlURL_CIF='%s' %lu n3=%d\n", urls->controlURL_CIF,
+	printf("urls->controlURL_CIF='%s' %lu n3=%zd\n", urls->controlURL_CIF,
 	       (unsigned long)strlen(urls->controlURL_CIF), n3);
 #endif
 }
@@ -582,9 +582,9 @@ FreeUPNPUrls(struct UPNPUrls * urls)
 }
 
 
-int ReceiveData(int socket, char * data, int length, int timeout)
+ssize_t ReceiveData(int socket, char * data, size_t length, int timeout)
 {
-    int n;
+    ssize_t n;
 #ifndef WIN32
     struct pollfd fds[1]; /* for the poll */
     fds[0].fd = socket;

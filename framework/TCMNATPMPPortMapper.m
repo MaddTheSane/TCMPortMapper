@@ -4,7 +4,7 @@
 #include "natpmp.h"
 
 #include <netinet/in.h>
-#include <netinet6/in6.h>
+//#include <netinet6/in6.h>
 #include <net/if.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -561,5 +561,3 @@ static void readData (
         [natpmpMapper didReceiveExternalIP:newIPAddress fromSenderAddress:senderAddress secondsSinceEpoch:secondsSinceEpoch];
     }
 }
-
-

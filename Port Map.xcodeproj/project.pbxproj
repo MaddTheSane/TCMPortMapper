@@ -27,9 +27,6 @@
 		3180159D0D4E1B9200BE3B28 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3180154D0D4E08D900BE3B28 /* SystemConfiguration.framework */; };
 		31FAE7D40D672D410085867F /* miniupnpc-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31FAE7D30D672D410085867F /* miniupnpc-LICENSE.txt */; };
 		ABA99C36167769070025CF6F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA99C35167769070025CF6F /* IOKit.framework */; };
-		F214E5F80D5F626800A06962 /* DotGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = F214E5F50D5F626800A06962 /* DotGreen.png */; };
-		F214E5F90D5F626800A06962 /* DotRed.png in Resources */ = {isa = PBXBuildFile; fileRef = F214E5F60D5F626800A06962 /* DotRed.png */; };
-		F214E5FA0D5F626800A06962 /* DotYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = F214E5F70D5F626800A06962 /* DotYellow.png */; };
 		F214E5FD0D5F62F700A06962 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = F214E5FB0D5F62F700A06962 /* MainMenu.nib */; };
 		F214E6080D5F646E00A06962 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F214E6060D5F646E00A06962 /* main.m */; };
 		F214E60C0D5F64BF00A06962 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = F214E60B0D5F64BF00A06962 /* AppController.m */; };
@@ -58,7 +55,6 @@
 		F24602F70DB4AFE300C509E9 /* OUItoCompany.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2CDB8FA0D65D82900B6A4E7 /* OUItoCompany.plist */; };
 		F2482BA50D589FD0002DF811 /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2482BA40D589FD0002DF811 /* RSVerticallyCenteredTextFieldCell.m */; };
 		F2482BA90D58A15F002DF811 /* TCMStatusImageFromMappingStatusValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = F2482BA80D58A15F002DF811 /* TCMStatusImageFromMappingStatusValueTransformer.m */; };
-		F2482BAC0D58A415002DF811 /* GenericQuestionMarkIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = F2482BAB0D58A415002DF811 /* GenericQuestionMarkIcon.icns */; };
 		F2482BBB0D58ABFA002DF811 /* TCMPortStringFromPublicPortValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = F2482BBA0D58ABFA002DF811 /* TCMPortStringFromPublicPortValueTransformer.m */; };
 		F27B83B60ED94616008E1983 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F27B83B40ED94616008E1983 /* Localizable.strings */; };
 		F290D6160EDAC1B200E643C0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F290D6150EDAC1B200E643C0 /* Sparkle.framework */; };
@@ -79,20 +75,11 @@
 		F2C6602E0D50C58F00820CAE /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C6602C0D50C58F00820CAE /* AppController.m */; };
 		F2C660350D50C59B00820CAE /* On20.png in Resources */ = {isa = PBXBuildFile; fileRef = F2C6602F0D50C59B00820CAE /* On20.png */; };
 		F2C660360D50C59B00820CAE /* Off20.png in Resources */ = {isa = PBXBuildFile; fileRef = F2C660300D50C59B00820CAE /* Off20.png */; };
-		F2C660370D50C59B00820CAE /* DotRed.png in Resources */ = {isa = PBXBuildFile; fileRef = F2C660310D50C59B00820CAE /* DotRed.png */; };
 		F2C660380D50C59B00820CAE /* PortMap.icns in Resources */ = {isa = PBXBuildFile; fileRef = F2C660320D50C59B00820CAE /* PortMap.icns */; };
-		F2C660390D50C59B00820CAE /* DotGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = F2C660330D50C59B00820CAE /* DotGreen.png */; };
-		F2C6603A0D50C59B00820CAE /* DotYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = F2C660340D50C59B00820CAE /* DotYellow.png */; };
 		F2C6603F0D50C62F00820CAE /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = F2C6603B0D50C62F00820CAE /* MainMenu.nib */; };
 		F2C660400D50C62F00820CAE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2C6603D0D50C62F00820CAE /* InfoPlist.strings */; };
 		F2C660480D50C68400820CAE /* TCMPortMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3180119F0D4DEC8400BE3B28 /* TCMPortMapper.framework */; };
 		F2C660510D50C69A00820CAE /* TCMPortMapper.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3180119F0D4DEC8400BE3B28 /* TCMPortMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		F2CDB8C80D65BF2200B6A4E7 /* NSAddTemplate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F2CDB8C50D65BF2200B6A4E7 /* NSAddTemplate.tiff */; };
-		F2CDB8C90D65BF2200B6A4E7 /* NSRefreshTemplate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F2CDB8C60D65BF2200B6A4E7 /* NSRefreshTemplate.tiff */; };
-		F2CDB8CA0D65BF2200B6A4E7 /* NSRemoveTemplate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F2CDB8C70D65BF2200B6A4E7 /* NSRemoveTemplate.tiff */; };
-		F2CDB8CF0D65C0AF00B6A4E7 /* NSRemoveTemplate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F2CDB8C70D65BF2200B6A4E7 /* NSRemoveTemplate.tiff */; };
-		F2CDB8D00D65C0B000B6A4E7 /* NSRefreshTemplate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F2CDB8C60D65BF2200B6A4E7 /* NSRefreshTemplate.tiff */; };
-		F2CDB8D10D65C0B100B6A4E7 /* NSAddTemplate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F2CDB8C50D65BF2200B6A4E7 /* NSAddTemplate.tiff */; };
 		F2CDB8FB0D65D82900B6A4E7 /* OUItoCompany.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2CDB8FA0D65D82900B6A4E7 /* OUItoCompany.plist */; };
 		F2D731D10D5B607D00CBD1D8 /* TCMPortMappingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D731D00D5B607D00CBD1D8 /* TCMPortMappingAdditions.m */; };
 		F2D731EA0D5B768300CBD1D8 /* Presets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2D731E90D5B768300CBD1D8 /* Presets.plist */; };
@@ -183,9 +170,6 @@
 		F2143AD90D881D9D00C91B69 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = /usr/lib/libssl.dylib; sourceTree = "<absolute>"; };
 		F214E5DB0D5F5FE600A06962 /* NATEcho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NATEcho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F214E5DD0D5F5FE600A06962 /* NATEcho-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "NATEcho-Info.plist"; path = "natecho/NATEcho-Info.plist"; sourceTree = "<group>"; };
-		F214E5F50D5F626800A06962 /* DotGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DotGreen.png; path = general_artwork/DotGreen.png; sourceTree = "<group>"; };
-		F214E5F60D5F626800A06962 /* DotRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DotRed.png; path = general_artwork/DotRed.png; sourceTree = "<group>"; };
-		F214E5F70D5F626800A06962 /* DotYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DotYellow.png; path = general_artwork/DotYellow.png; sourceTree = "<group>"; };
 		F214E5FC0D5F62F700A06962 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = natecho/English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		F214E6060D5F646E00A06962 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = natecho/main.m; sourceTree = "<group>"; };
 		F214E6070D5F646E00A06962 /* natecho_prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = natecho_prefix.pch; path = natecho/natecho_prefix.pch; sourceTree = "<group>"; };
@@ -234,10 +218,9 @@
 		F2482BA40D589FD0002DF811 /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSVerticallyCenteredTextFieldCell.m; path = RSVerticallyCenteredTextFieldCell/RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		F2482BA70D58A15F002DF811 /* TCMStatusImageFromMappingStatusValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCMStatusImageFromMappingStatusValueTransformer.h; path = portmap/TCMStatusImageFromMappingStatusValueTransformer.h; sourceTree = "<group>"; };
 		F2482BA80D58A15F002DF811 /* TCMStatusImageFromMappingStatusValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCMStatusImageFromMappingStatusValueTransformer.m; path = portmap/TCMStatusImageFromMappingStatusValueTransformer.m; sourceTree = "<group>"; };
-		F2482BAB0D58A415002DF811 /* GenericQuestionMarkIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = GenericQuestionMarkIcon.icns; path = portmap/artwork/GenericQuestionMarkIcon.icns; sourceTree = "<group>"; };
 		F2482BB90D58ABFA002DF811 /* TCMPortStringFromPublicPortValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCMPortStringFromPublicPortValueTransformer.h; path = portmap/TCMPortStringFromPublicPortValueTransformer.h; sourceTree = "<group>"; };
 		F2482BBA0D58ABFA002DF811 /* TCMPortStringFromPublicPortValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCMPortStringFromPublicPortValueTransformer.m; path = portmap/TCMPortStringFromPublicPortValueTransformer.m; sourceTree = "<group>"; };
-		F27B83B50ED94616008E1983 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = portmap/English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F27B83B50ED94616008E1983 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = portmap/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F290D6150EDAC1B200E643C0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		F290D6330EDAC44000E643C0 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = portmap/dsa_pub.pem; sourceTree = "<group>"; };
 		F290D63C0EDAEBFB00E643C0 /* portmap_releasenotes.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = portmap_releasenotes.css; path = portmap/htdocs/portmap_releasenotes.css; sourceTree = "<group>"; };
@@ -273,15 +256,9 @@
 		F2C6602D0D50C58F00820CAE /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = portmap/AppController.h; sourceTree = "<group>"; };
 		F2C6602F0D50C59B00820CAE /* On20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = On20.png; path = portmap/artwork/On20.png; sourceTree = "<group>"; };
 		F2C660300D50C59B00820CAE /* Off20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Off20.png; path = portmap/artwork/Off20.png; sourceTree = "<group>"; };
-		F2C660310D50C59B00820CAE /* DotRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DotRed.png; path = general_artwork/DotRed.png; sourceTree = "<group>"; };
 		F2C660320D50C59B00820CAE /* PortMap.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = PortMap.icns; path = portmap/artwork/PortMap.icns; sourceTree = "<group>"; };
-		F2C660330D50C59B00820CAE /* DotGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DotGreen.png; path = general_artwork/DotGreen.png; sourceTree = "<group>"; };
-		F2C660340D50C59B00820CAE /* DotYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DotYellow.png; path = general_artwork/DotYellow.png; sourceTree = "<group>"; };
 		F2C6603C0D50C62F00820CAE /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = portmap/English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		F2C6603E0D50C62F00820CAE /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = portmap/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F2CDB8C50D65BF2200B6A4E7 /* NSAddTemplate.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = NSAddTemplate.tiff; path = portmap/artwork/NSAddTemplate.tiff; sourceTree = "<group>"; };
-		F2CDB8C60D65BF2200B6A4E7 /* NSRefreshTemplate.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = NSRefreshTemplate.tiff; path = portmap/artwork/NSRefreshTemplate.tiff; sourceTree = "<group>"; };
-		F2CDB8C70D65BF2200B6A4E7 /* NSRemoveTemplate.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = NSRemoveTemplate.tiff; path = portmap/artwork/NSRemoveTemplate.tiff; sourceTree = "<group>"; };
 		F2CDB8FA0D65D82900B6A4E7 /* OUItoCompany.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = OUItoCompany.plist; path = framework/OUItoCompany.plist; sourceTree = "<group>"; };
 		F2D731CF0D5B607D00CBD1D8 /* TCMPortMappingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCMPortMappingAdditions.h; path = portmap/TCMPortMappingAdditions.h; sourceTree = "<group>"; };
 		F2D731D00D5B607D00CBD1D8 /* TCMPortMappingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCMPortMappingAdditions.m; path = portmap/TCMPortMappingAdditions.m; sourceTree = "<group>"; };
@@ -381,23 +358,12 @@
 			children = (
 				F214E6040D5F643300A06962 /* Other Sources */,
 				F214E6000D5F630000A06962 /* Resources */,
-				F214E5F40D5F625700A06962 /* artwork */,
 				F214E60A0D5F64BF00A06962 /* AppController.h */,
 				F214E60B0D5F64BF00A06962 /* AppController.m */,
 				F217EF200D6082B40028E112 /* TCPServer.h */,
 				F217EF210D6082B40028E112 /* TCPServer.m */,
 			);
 			name = NATEcho.app;
-			sourceTree = "<group>";
-		};
-		F214E5F40D5F625700A06962 /* artwork */ = {
-			isa = PBXGroup;
-			children = (
-				F214E5F50D5F626800A06962 /* DotGreen.png */,
-				F214E5F60D5F626800A06962 /* DotRed.png */,
-				F214E5F70D5F626800A06962 /* DotYellow.png */,
-			);
-			name = artwork;
 			sourceTree = "<group>";
 		};
 		F214E6000D5F630000A06962 /* Resources */ = {
@@ -472,15 +438,8 @@
 		F24603880DB4B63A00C509E9 /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
-				F2482BAB0D58A415002DF811 /* GenericQuestionMarkIcon.icns */,
-				F2CDB8C50D65BF2200B6A4E7 /* NSAddTemplate.tiff */,
-				F2CDB8C60D65BF2200B6A4E7 /* NSRefreshTemplate.tiff */,
-				F2CDB8C70D65BF2200B6A4E7 /* NSRemoveTemplate.tiff */,
 				F2C6602F0D50C59B00820CAE /* On20.png */,
 				F2C660300D50C59B00820CAE /* Off20.png */,
-				F2C660310D50C59B00820CAE /* DotRed.png */,
-				F2C660330D50C59B00820CAE /* DotGreen.png */,
-				F2C660340D50C59B00820CAE /* DotYellow.png */,
 			);
 			name = Artwork;
 			sourceTree = "<group>";
@@ -752,13 +711,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F214E5F80D5F626800A06962 /* DotGreen.png in Resources */,
-				F214E5F90D5F626800A06962 /* DotRed.png in Resources */,
-				F214E5FA0D5F626800A06962 /* DotYellow.png in Resources */,
 				F214E5FD0D5F62F700A06962 /* MainMenu.nib in Resources */,
-				F2CDB8C80D65BF2200B6A4E7 /* NSAddTemplate.tiff in Resources */,
-				F2CDB8C90D65BF2200B6A4E7 /* NSRefreshTemplate.tiff in Resources */,
-				F2CDB8CA0D65BF2200B6A4E7 /* NSRemoveTemplate.tiff in Resources */,
 				F2CDB8FB0D65D82900B6A4E7 /* OUItoCompany.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -769,17 +722,10 @@
 			files = (
 				F2C660350D50C59B00820CAE /* On20.png in Resources */,
 				F2C660360D50C59B00820CAE /* Off20.png in Resources */,
-				F2C660370D50C59B00820CAE /* DotRed.png in Resources */,
 				F2C660380D50C59B00820CAE /* PortMap.icns in Resources */,
-				F2C660390D50C59B00820CAE /* DotGreen.png in Resources */,
-				F2C6603A0D50C59B00820CAE /* DotYellow.png in Resources */,
 				F2C6603F0D50C62F00820CAE /* MainMenu.nib in Resources */,
 				F2C660400D50C62F00820CAE /* InfoPlist.strings in Resources */,
-				F2482BAC0D58A415002DF811 /* GenericQuestionMarkIcon.icns in Resources */,
 				F2D731EA0D5B768300CBD1D8 /* Presets.plist in Resources */,
-				F2CDB8CF0D65C0AF00B6A4E7 /* NSRemoveTemplate.tiff in Resources */,
-				F2CDB8D00D65C0B000B6A4E7 /* NSRefreshTemplate.tiff in Resources */,
-				F2CDB8D10D65C0B100B6A4E7 /* NSAddTemplate.tiff in Resources */,
 				31FAE7D40D672D410085867F /* miniupnpc-LICENSE.txt in Resources */,
 				F27B83B60ED94616008E1983 /* Localizable.strings in Resources */,
 				F290D6340EDAC44000E643C0 /* dsa_pub.pem in Resources */,
