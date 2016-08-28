@@ -43,7 +43,6 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
 
 - (void)setLatestUPNPPortMappingsList:(NSArray *)aLatestList {
     if (aLatestList != _latestUPNPPortMappingsList) {
-        id tmp = _latestUPNPPortMappingsList;
         _latestUPNPPortMappingsList = aLatestList;
             //[tmp autorelease];
     }

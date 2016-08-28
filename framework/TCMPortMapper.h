@@ -89,11 +89,14 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 }
 
 + (TCMPortMapper *)sharedInstance;
+#if __has_feature(objc_class_property)
+@property (class, readonly, strong) TCMPortMapper *sharedInstance;
+#endif
 + (NSString *)manufacturerForHardwareAddress:(NSString *)aMACAddress;
 + (NSString *)sizereducableHashOfString:(NSString *)inString;
 
 @property (readonly, copy) NSSet<TCMPortMapping*> *portMappings;
-- (NSMutableSet *)removeMappingQueue;
+@property (readonly, strong) NSMutableSet *removeMappingQueue;
 - (void)addPortMapping:(TCMPortMapping *)aMapping;
 - (void)removePortMapping:(TCMPortMapping *)aMapping;
 - (void)refresh;
@@ -104,7 +107,7 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 - (void)stop;
 - (void)stopBlocking;
 
-@property (strong) NSString *appIdentifier;
+@property (nonatomic, strong) NSString *appIdentifier;
 
 /// will request the complete UPNPMappingTable and deliver it using a TCMPortMapperDidReceiveUPNPMappingTableNotification with "mappingTable" in the userInfo Dictionary (if current router is a UPNP router)
 - (void)requestUPNPMappingTable;
@@ -112,7 +115,7 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 - (void)removeUPNPMappings:(NSArray *)aMappingList;
 
 /// needed for generating a UPNP port mapping description that differs for each user
-@property (nonatomic, copy) NSString *userID;
+@property (copy) NSString *userID;
 /// we provide a half length md5 has for convenience
 /// we could use full length but the description field of the routers might be limited
 - (void)hashUserID:(NSString *)aUserIDToHash;

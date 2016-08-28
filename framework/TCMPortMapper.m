@@ -22,7 +22,7 @@
 
 #import <err.h>
 
-void CopySerialNumber(CFStringRef *serialNumber);
+static void CopySerialNumber(CFStringRef *serialNumber);
 
 // update port mappings all 30 minutes as a default
 #define UPNP_REFRESH_INTERVAL (30.*60.)
@@ -80,12 +80,12 @@ enum {
 
 @implementation TCMPortMapping 
 
-+ (id)portMappingWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(int)aTransportProtocol userInfo:(id)aUserInfo {
++ (id)portMappingWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(id)aUserInfo {
     NSAssert(aPrivatePort<65536 && aPublicPort<65536 && aPrivatePort>0 && aPublicPort>0, @"Port number has to be between 1 and 65535");
     return [[self alloc] initWithLocalPort:aPrivatePort desiredExternalPort:aPublicPort transportProtocol:aTransportProtocol userInfo:aUserInfo];
 }
 
-- (id)initWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(int)aTransportProtocol userInfo:(id)aUserInfo {
+- (id)initWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(id)aUserInfo {
     if ((self=[super init])) {
         _desiredExternalPort = aPublicPort;
         _localPort = aPrivatePort;
@@ -145,7 +145,7 @@ enum {
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ privatePort:%u desiredPublicPort:%u publicPort:%u mappingStatus:%@ transportProtocol:%d",[super description], _localPort, _desiredExternalPort, _externalPort, _mappingStatus == TCMPortMappingStatusUnmapped ? @"unmapped" : (_mappingStatus == TCMPortMappingStatusMapped ? @"mapped" : @"trying"),_transportProtocol];
+    return [NSString stringWithFormat:@"%@ privatePort:%u desiredPublicPort:%u publicPort:%u mappingStatus:%@ transportProtocol:%ld",[super description], _localPort, _desiredExternalPort, _externalPort, _mappingStatus == TCMPortMappingStatusUnmapped ? @"unmapped" : (_mappingStatus == TCMPortMappingStatusMapped ? @"mapped" : @"trying"),(long)_transportProtocol];
 }
 
 @end
@@ -159,9 +159,19 @@ enum {
 - (void)scheduleRefresh;
 @end
 
+@interface TCMPortMapper ()
+@property (nonatomic, readwrite, copy) NSString *localIPAddress;
+@end
+
 @implementation TCMPortMapper
 
 @synthesize appIdentifier = _appIdentifier;
+@synthesize externalIPAddress = _externalIPAddress;
+@synthesize userID = _userID;
+@synthesize localIPAddress = _localIPAddress;
+@synthesize running = _isRunning;
+@synthesize routerName = _routerName;
+@synthesize mappingProtocol = _mappingProtocol;
 
 + (TCMPortMapper *)sharedInstance
 {
@@ -231,6 +241,7 @@ enum {
         return [[[[NSBundle mainBundle] bundlePath] lastPathComponent] stringByDeletingPathExtension];
     }
 }
+
 - (BOOL)networkReachable {
     Boolean success = 0;
     BOOL okay = NO;
@@ -259,9 +270,6 @@ enum {
     }
 }
 
-- (NSString *)externalIPAddress {
-    return _externalIPAddress;
-}
 
 - (NSString *)localBonjourHostName {
     SCDynamicStoreRef dynRef = SCDynamicStoreCreate(kCFAllocatorSystemDefault, (CFStringRef)@"TCMPortMapper", NULL, NULL); 
@@ -326,13 +334,9 @@ enum {
     return _localIPAddress;
 }
 
-- (NSString *)userID {
-    return _userID;
-}
-
 + (NSString *)sizereducableHashOfString:(NSString *)inString {
     unsigned char digest[16];
-    char hashstring[16*2+1];
+    NSMutableString *hashstring = [NSMutableString stringWithCapacity:16*2];
     int i;
     NSData *dataToHash = [inString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:NO];
 
@@ -342,10 +346,9 @@ enum {
     CC_MD5([dataToHash bytes], [dataToHash length], digest);
 #endif
     
-    for(i=0;i<16;i++) sprintf(hashstring+i*2,"%02x",digest[i]);
-    hashstring[i*2]=0;
+    for(i=0;i<16;i++) [hashstring appendFormat:@"%02x", digest[i]];
     
-    return [NSString stringWithUTF8String:hashstring];
+    return [NSString stringWithString:hashstring];
 }
 
 - (void)hashUserID:(NSString *)aUserIDToHash {
@@ -354,20 +357,11 @@ enum {
     [self setUserID:hashString];
 }
 
-- (void)setUserID:(NSString *)aUserID {
-    if (_userID != aUserID) {
-        NSString *tmp = _userID;
-        _userID = [aUserID copy];
-    }
-}
-
 - (NSSet *)portMappings{
-    return _portMappings;
+    return [_portMappings copy];
 }
 
-- (NSMutableSet *)removeMappingQueue {
-    return _removeMappingQueue;
-}
+@synthesize removeMappingQueue = _removeMappingQueue;
 
 - (NSMutableSet *)_upnpPortMappingsToRemove {
     return _upnpPortMappingsToRemove;
@@ -478,18 +472,10 @@ enum {
 
 - (void)setExternalIPAddress:(NSString *)anIPAddress {
     if (_externalIPAddress != anIPAddress) {
-        NSString *tmp=_externalIPAddress;
         _externalIPAddress = anIPAddress;
     }
     // notify always even if the external IP Address is unchanged so that we get the notification anytime when new information is here
     [[NSNotificationCenter defaultCenter] postNotificationName:TCMPortMapperExternalIPAddressDidChange object:self];
-}
-
-- (void)setLocalIPAddress:(NSString *)anIPAddress {
-    if (_localIPAddress != anIPAddress) {
-        NSString *tmp=_localIPAddress;
-        _localIPAddress = anIPAddress;
-    }
 }
 
 - (NSString *)hardwareAddressForIPAddress: (NSString *) address {
@@ -727,28 +713,6 @@ enum {
         _sendUPNPMappingTableNotification = YES;
         [_UPNPPortMapper updatePortMappings];
     }
-}
-
-
-- (void)setMappingProtocol:(NSString *)aProtocol {
-    _mappingProtocol = [aProtocol copy];
-}
-
-- (NSString *)mappingProtocol {
-    return _mappingProtocol;
-}
-
-- (void)setRouterName:(NSString *)aRouterName {
-//    NSLog(@"%s %@->%@",__FUNCTION__,_routerName,aRouterName);
-    _routerName = [aRouterName copy];
-}
-
-- (NSString *)routerName {
-    return _routerName;
-}
-
-- (BOOL)isRunning {
-    return _isRunning;
 }
 
 - (BOOL)isAtWork {
