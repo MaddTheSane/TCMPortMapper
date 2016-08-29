@@ -85,7 +85,7 @@ enum {
     return [[self alloc] initWithLocalPort:aPrivatePort desiredExternalPort:aPublicPort transportProtocol:aTransportProtocol userInfo:aUserInfo];
 }
 
-- (id)initWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(id)aUserInfo {
+- (id)initWithLocalPort:(unsigned short)aPrivatePort desiredExternalPort:(unsigned short)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(id)aUserInfo {
     if ((self=[super init])) {
         _desiredExternalPort = aPublicPort;
         _localPort = aPrivatePort;
@@ -430,7 +430,7 @@ enum {
 
 - (void)setExternalIPAddress:(NSString *)anIPAddress {
     if (_externalIPAddress != anIPAddress) {
-        _externalIPAddress = anIPAddress;
+        _externalIPAddress = [anIPAddress copy];
     }
     // notify always even if the external IP Address is unchanged so that we get the notification anytime when new information is here
     [[NSNotificationCenter defaultCenter] postNotificationName:TCMPortMapperExternalIPAddressDidChange object:self];

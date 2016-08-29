@@ -12,6 +12,8 @@
 #include <string.h>
 #include <unistd.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString * const TCMPortMapperExternalIPAddressDidChange;
 
 extern NSString * const TCMPortMapperWillStartSearchForRouterNotification;
@@ -43,21 +45,21 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 
 
 @interface TCMPortMapping : NSObject {
-    int _localPort;
-    int _externalPort;
-    int _desiredExternalPort;
+    unsigned short _localPort;
+    unsigned short _externalPort;
+    unsigned short _desiredExternalPort;
     id  _userInfo;
     TCMPortMappingStatus _mappingStatus;
     TCMPortMappingTransportProtocol _transportProtocol;
 }
-+ (instancetype)portMappingWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(id)aUserInfo;
-- (instancetype)initWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(id)aUserInfo;
-@property (readonly) int desiredExternalPort;
-@property (readonly, retain) id userInfo;
++ (instancetype)portMappingWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(nullable id)aUserInfo NS_SWIFT_UNAVAILABLE("Use TCMPortMapping(localPort:desiredExternalPort:transportProtocol:userInfo: instead");
+- (instancetype)initWithLocalPort:(unsigned short)aPrivatePort desiredExternalPort:(unsigned short)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(nullable id)aUserInfo;
+@property (readonly) unsigned short desiredExternalPort;
+@property (readonly, retain, nullable) id userInfo;
 @property (nonatomic) TCMPortMappingStatus mappingStatus;
 @property TCMPortMappingTransportProtocol transportProtocol;
-@property int externalPort;
-@property (readonly) int localPort;
+@property unsigned short externalPort;
+@property (readonly) unsigned short localPort;
 
 @end
 
@@ -86,11 +88,11 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 #if __has_feature(objc_class_property)
 @property (class, readonly, strong) TCMPortMapper *sharedInstance;
 #endif
-+ (NSString *)manufacturerForHardwareAddress:(NSString *)aMACAddress;
++ (nullable NSString *)manufacturerForHardwareAddress:(NSString *)aMACAddress;
 + (NSString *)sizereducableHashOfString:(NSString *)inString;
 
 @property (readonly, copy) NSSet<TCMPortMapping*> *portMappings;
-@property (readonly, strong) NSMutableSet *removeMappingQueue;
+@property (readonly, strong) NSMutableSet<TCMPortMapping*> *removeMappingQueue;
 - (void)addPortMapping:(TCMPortMapping *)aMapping;
 - (void)removePortMapping:(TCMPortMapping *)aMapping;
 - (void)refresh;
@@ -101,12 +103,12 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 - (void)stop;
 - (void)stopBlocking;
 
-@property (nonatomic, copy) NSString *appIdentifier;
+@property (nonatomic, copy, null_resettable) NSString *appIdentifier;
 
 /// will request the complete UPNPMappingTable and deliver it using a TCMPortMapperDidReceiveUPNPMappingTableNotification with "mappingTable" in the userInfo Dictionary (if current router is a UPNP router)
 - (void)requestUPNPMappingTable;
 /// this is mainly for Port Map.app and can remove any mappings that can be removed using UPNP (including mappings from other hosts). aMappingList is an Array of Dictionaries with the key @"protocol" and @"publicPort".
-- (void)removeUPNPMappings:(NSArray *)aMappingList;
+- (void)removeUPNPMappings:(NSArray<NSDictionary<NSString*,id>*> *)aMappingList;
 
 /// needed for generating a UPNP port mapping description that differs for each user
 @property (copy) NSString *userID;
@@ -114,11 +116,11 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 /// we could use full length but the description field of the routers might be limited
 - (void)hashUserID:(NSString *)aUserIDToHash;
 
-@property (readonly, copy) NSString *externalIPAddress;
+@property (readonly, copy, nullable) NSString *externalIPAddress;
 @property (readonly, copy) NSString *localIPAddress;
 @property (readonly, copy) NSString *localBonjourHostName;
 @property (copy) NSString *mappingProtocol;
-@property (copy) NSString *routerName;
+@property (copy, nullable) NSString *routerName;
 @property (readonly, copy) NSString *routerIPAddress;
 @property (readonly, copy) NSString *routerHardwareAddress;
 
@@ -127,3 +129,5 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 
 
 @end
+
+NS_ASSUME_NONNULL_END
