@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- Copyright � 2005 Apple Computer, Inc., All Rights Reserved
+ Copyright © 2005 Apple Computer, Inc., All Rights Reserved
  */ 
 
 #import "TCPServer.h"
@@ -52,9 +52,14 @@
 NSString * const TCPServerErrorDomain = @"TCPServerErrorDomain";
 
 @implementation TCPServer
+@synthesize delegate;
+@synthesize domain;
+@synthesize name;
+@synthesize type;
+@synthesize port;
 
 - (id)init {
-    return self;
+    return self = [super init];
 }
 
 - (void)dealloc {
@@ -63,57 +68,6 @@ NSString * const TCPServerErrorDomain = @"TCPServerErrorDomain";
     [name release];
     [type release];
     [super dealloc];
-}
-
-- (id)delegate {
-    return delegate;
-}
-
-- (void)setDelegate:(id)value {
-    delegate = value;
-}
-
-- (NSString *)domain {
-    return domain;
-}
-
-- (void)setDomain:(NSString *)value {
-    if (domain != value) {
-        [domain release];
-        domain = [value copy];
-    }
-}
-
-- (NSString *)name {
-    return name;
-}
-
-
-//- (void)setName:(NSString *)value {
-- (void)setTcpServerName:(NSString *)value {
-    if (name != value) {
-        [name release];
-        name = [value copy];
-    }
-}
-
-- (NSString *)type {
-    return type;
-}
-
-- (void)setType:(NSString *)value {
-    if (type != value) {
-        [type release];
-        type = [value copy];
-    }
-}
-
-- (uint16_t)port {
-    return port;
-}
-
-- (void)setPort:(uint16_t)value {
-    port = value;
 }
 
 - (void)handleNewConnectionFromAddress:(NSData *)addr inputStream:(NSInputStream *)istr outputStream:(NSOutputStream *)ostr {

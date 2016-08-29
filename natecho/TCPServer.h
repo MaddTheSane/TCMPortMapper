@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- Copyright � 2005 Apple Computer, Inc., All Rights Reserved
+ Copyright © 2005 Apple Computer, Inc., All Rights Reserved
  */ 
 
 #import <Foundation/Foundation.h>
@@ -55,9 +55,11 @@ typedef enum {
     kTCPServerNoSocketsAvailable = 3,
 } TCPServerErrorCode;
 
+@protocol TCPServerDelegate;
+
 @interface TCPServer : NSObject {
 @private
-    id delegate;
+    __unsafe_unretained id<TCPServerDelegate> delegate;
     NSString *domain;
     NSString *name;
     NSString *type;
@@ -67,34 +69,24 @@ typedef enum {
     NSNetService *netService;
 }
 
-- (id)delegate;
-- (void)setDelegate:(id)value;
-
-- (NSString *)domain;
-- (void)setDomain:(NSString *)value;
-
-- (NSString *)name;
-
-//- (void)setName:(NSString *)value;
-- (void)setTcpServerName:(NSString *)value;
-
-- (NSString *)type;
-- (void)setType:(NSString *)value;
-
-- (uint16_t)port;
-- (void)setPort:(uint16_t)value;
+@property (unsafe_unretained) id<TCPServerDelegate> delegate;
+@property (copy) NSString *domain;
+@property (copy, setter=setTcpServerName:) NSString *name;
+@property (copy) NSString *type;
+@property uint16_t port;
 
 - (BOOL)start:(NSError **)error;
 - (BOOL)stop;
 
+/// called when a new connection comes in; by default, informs the delegate
 - (void)handleNewConnectionFromAddress:(NSData *)addr inputStream:(NSInputStream *)istr outputStream:(NSOutputStream *)ostr;
-// called when a new connection comes in; by default, informs the delegate
 
 @end
 
-@interface TCPServer (TCPServerDelegateMethods)
+@protocol TCPServerDelegate <NSObject>
+@optional
+/// if the delegate implements this method, it is called when a new
+/// connection comes in; a subclass may, of course, change that behavior
 - (void)TCPServer:(TCPServer *)server didReceiveConnectionFromAddress:(NSData *)addr inputStream:(NSInputStream *)istr outputStream:(NSOutputStream *)ostr;
-// if the delegate implements this method, it is called when a new  
-// connection comes in; a subclass may, of course, change that behavior
 @end
 

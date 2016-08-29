@@ -114,13 +114,13 @@
 }
 
 - (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent {
-    NSLog(@"%s %@ %d",__FUNCTION__,theStream,streamEvent);
+    NSLog(@"%s %@ %lu",__FUNCTION__,theStream,(unsigned long)streamEvent);
     NSInputStream *inputStream = (NSInputStream *)theStream;
     switch(streamEvent) {
     case NSStreamEventHasBytesAvailable:
         if ([inputStream hasBytesAvailable]) {
             unsigned char buffer[4097];
-            int length = [inputStream read:buffer maxLength:4096];
+            NSInteger length = [inputStream read:buffer maxLength:4096];
             if (length) {
                 buffer[length]=0;
                 NSLog(@"%s %s",__FUNCTION__,buffer);
@@ -129,6 +129,10 @@
             }
         }
         break;
+            
+        default:
+            //do nothing
+            break;
     }
 }
 
