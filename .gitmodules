@@ -1,3 +1,6 @@
 [submodule "framework/libnatpmp"]
 	path = framework/libnatpmp
 	url = https://github.com/MaddTheSane/libnatpmp.git
+[submodule "framework/miniupnp"]
+	path = framework/miniupnp
+	url = https://github.com/MaddTheSane/miniupnp.git
