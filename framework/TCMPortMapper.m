@@ -17,7 +17,9 @@
 
 #include <err.h>
 
-static void CopySerialNumber(CFStringRef *serialNumber);
+/// Returns the serial number as an <code>NSString</code>.
+/// It is the caller's responsibility to release the returned \c NSString when done with it.
+static NSString *CopySerialNumber(void) NS_RETURNS_RETAINED;
 
 // update port mappings all 30 minutes as a default
 #define UPNP_REFRESH_INTERVAL (30.*60.)
@@ -76,6 +78,7 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
 @implementation TCMPortMapping 
 @synthesize desiredExternalPort = _desiredExternalPort;
 @synthesize mappingStatus = _mappingStatus;
+@synthesize transportProtocol = _transportProtocol;
 @synthesize userInfo = _userInfo;
 @synthesize externalPort = _externalPort;
 @synthesize localPort = _localPort;
@@ -141,7 +144,7 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
     BOOL _localIPOnRouterSubnet;
     BOOL _sendUPNPMappingTableNotification;
     NSString *_userID;
-    NSMutableSet<TCMPortMapping*> *_upnpPortMappingsToRemove;
+    NSMutableSet<NSDictionary<NSString*,id>*> *_upnpPortMappingsToRemove;
     NSTimer *_upnpPortMapperTimer;
     BOOL _ignoreNetworkChanges;
     BOOL _refreshIsScheduled;
@@ -170,7 +173,7 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
         return S_sharedInstance;
     }
     if ((self=[super init])) {
-        _systemConfigNotificationManager = [IXSCNotificationManager new];
+        _systemConfigNotificationManager = [[IXSCNotificationManager alloc] init];
         // since we are only interested in this specific key, let us configure it so.
         [_systemConfigNotificationManager setObservedKeys:[NSArray arrayWithObject:@"State:/Network/Global/IPv4"] regExes:nil];
         _isRunning = NO;
@@ -185,11 +188,10 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
         // use the machine serial number to increase uniqueness in situations where usernames may be reused,
         // such as in labs, educational and development environments
         NSString *userName = NSUserName();
-        CFStringRef serialNumber;
-        CopySerialNumber(&serialNumber);
+        NSString *serialNumber = CopySerialNumber();
         if (serialNumber) {
             userName = [NSString stringWithFormat:@"%@@%@", userName, serialNumber];
-            CFRelease(serialNumber);
+            serialNumber = nil;
         }
         [self hashUserID:userName];
         
@@ -785,27 +787,23 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
 
 @end
 
-// Returns the serial number as a CFString.
-// It is the caller's responsibility to release the returned CFString when done with it.
-void CopySerialNumber(CFStringRef *serialNumber)
+NSString *CopySerialNumber()
 {
+    NSString *serialNumber = nil;
     
-	if (serialNumber != NULL) {
-		*serialNumber = NULL;
-		
-		io_service_t    platformExpert = IOServiceGetMatchingService(kIOMasterPortDefault,
-																	 IOServiceMatching("IOPlatformExpertDevice"));
-		
-		if (platformExpert) {
-			CFTypeRef serialNumberAsCFString =
-			IORegistryEntryCreateCFProperty(platformExpert,
-											CFSTR(kIOPlatformSerialNumberKey),
-											kCFAllocatorDefault, 0);
-			if (serialNumberAsCFString) {
-				*serialNumber = serialNumberAsCFString;
-			}
-			
-			IOObjectRelease(platformExpert);
-		}
-	}
+    io_service_t platformExpert = IOServiceGetMatchingService(kIOMasterPortDefault,
+                                                              IOServiceMatching("IOPlatformExpertDevice"));
+    
+    if (platformExpert) {
+        CFTypeRef serialNumberAsCFString =
+        IORegistryEntryCreateCFProperty(platformExpert,
+                                        CFSTR(kIOPlatformSerialNumberKey),
+                                        kCFAllocatorDefault, 0);
+        if (serialNumberAsCFString) {
+            serialNumber = CFBridgingRelease(serialNumberAsCFString);
+        }
+        
+        IOObjectRelease(platformExpert);
+    }
+    return serialNumber;
 }

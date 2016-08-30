@@ -108,7 +108,7 @@ typedef NS_OPTIONS(unsigned char, TCMPortMappingTransportProtocol) {
 @property (readonly, copy) NSString *routerHardwareAddress;
 
 // private accessors
-- (NSMutableSet *)_upnpPortMappingsToRemove;
+- (NSMutableSet<NSDictionary<NSString*,id>*> *)_upnpPortMappingsToRemove;
 
 
 @end
