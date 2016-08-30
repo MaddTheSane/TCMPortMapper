@@ -39,7 +39,7 @@ NSString * const TCMNoPortMapProtocol   = @"None";
 
 static TCMPortMapper *S_sharedInstance;
 
-enum {
+typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
     TCMPortMapProtocolFailed = 0,
     TCMPortMapProtocolTrying = 1,
     TCMPortMapProtocolWorks = 2
@@ -129,6 +129,24 @@ enum {
     TCMNATPMPPortMapper *_NATPMPPortMapper;
     TCMUPNPPortMapper *_UPNPPortMapper;
     IXSCNotificationManager *_systemConfigNotificationManager;
+    NSMutableSet<TCMPortMapping*> *_portMappings;
+    NSMutableSet<TCMPortMapping*> *_removeMappingQueue;
+    BOOL _isRunning;
+    NSString *_localIPAddress;
+    NSString *_externalIPAddress;
+    TCMPortMapProtocolStatus _NATPMPStatus;
+    TCMPortMapProtocolStatus _UPNPStatus;
+    NSString *_mappingProtocol;
+    NSString *_routerName;
+    NSInteger _workCount;
+    BOOL _localIPOnRouterSubnet;
+    BOOL _sendUPNPMappingTableNotification;
+    NSString *_userID;
+    NSMutableSet<TCMPortMapping*> *_upnpPortMappingsToRemove;
+    NSTimer *_upnpPortMapperTimer;
+    BOOL _ignoreNetworkChanges;
+    BOOL _refreshIsScheduled;
+    NSString *_appIdentifier;
 }
 
 @synthesize appIdentifier = _appIdentifier;
@@ -700,7 +718,7 @@ enum {
 
 - (void)increaseWorkCount:(NSNotification *)aNotification {
 #ifdef DEBUG
-    NSLog(@"%s %d %@",__FUNCTION__,_workCount,aNotification);
+    NSLog(@"%s %ld %@",__FUNCTION__,(long)_workCount,aNotification);
 #endif
     if (_workCount == 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:TCMPortMapperDidStartWorkNotification object:self];
@@ -710,7 +728,7 @@ enum {
 
 - (void)decreaseWorkCount:(NSNotification *)aNotification {
 #ifdef DEBUG
-    NSLog(@"%s %d %@",__FUNCTION__,_workCount,aNotification);
+    NSLog(@"%s %ld %@",__FUNCTION__,(long)_workCount,aNotification);
 #endif
     _workCount--;
     if (_workCount == 0) {
@@ -739,7 +757,7 @@ enum {
 
 - (void)willSleep:(NSNotification *)aNotification {
 #ifdef DEBUG
-	NSLog(@"%s, pmp:%d, upnp:%d",__FUNCTION__,_NATPMPStatus,_UPNPStatus);
+	NSLog(@"%s, pmp:%ld, upnp:%ld",__FUNCTION__,(long)_NATPMPStatus,(long)_UPNPStatus);
 #endif
 	_ignoreNetworkChanges = YES;
     if (_isRunning) {

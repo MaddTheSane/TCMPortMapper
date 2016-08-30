@@ -17,7 +17,7 @@
  *                 with the name "State:/Network/Global/IPv4".
  *                 If you want to recieve notifications on any change in the
  *                 system configuration databse, register for notifications
- *                 on the IXSCNotificationManager object.
+ *                 on the \c IXSCNotificationManager object.
  *                 The user info in the notification is the data in the database
  *                 for the key you listen for.
  */
@@ -26,14 +26,15 @@
 	CFRunLoopSourceRef rlSrc;
 }
 
+- (nonnull instancetype)init;
 
 /*!
  * @method         setObservedKeys:regExes:
  * @abstract       An optimisation method that restricts the keys that are observed 
                    and for which Notification are posted to the Notification Center
- * @discussion     Default Value is inKeys:nil inRegExArray:[@".*"] which is in fact a 
+ * @discussion     Default Value is <code>inKeys:nil inRegExArray:[@".*"]</code> which is in fact a
                    observe all
  */
-- (void)setObservedKeys:(NSArray *)inKeyArray regExes:(NSArray *)inRegExeArray;
+- (void)setObservedKeys:(nullable NSArray<NSString*> *)inKeyArray regExes:(nullable NSArray<NSString*> *)inRegExeArray;
 
 @end

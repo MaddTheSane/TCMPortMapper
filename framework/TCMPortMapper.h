@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, TCMPortMappingStatus) {
     TCMPortMappingStatusMapped   = 2
 };
 
-typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
+typedef NS_OPTIONS(NSInteger, TCMPortMappingTransportProtocol) {
     TCMPortMappingTransportProtocolUDP  = 1,
     TCMPortMappingTransportProtocolTCP  = 2,
     TCMPortMappingTransportProtocolBoth = 3
@@ -63,26 +63,7 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 
 @end
 
-@interface TCMPortMapper : NSObject {
-    NSMutableSet *_portMappings;
-    NSMutableSet *_removeMappingQueue;
-    BOOL _isRunning;
-    NSString *_localIPAddress;
-    NSString *_externalIPAddress;
-    int _NATPMPStatus;
-    int _UPNPStatus;
-    NSString *_mappingProtocol;
-    NSString *_routerName;
-    int _workCount;
-    BOOL _localIPOnRouterSubnet;
-    BOOL _sendUPNPMappingTableNotification;
-    NSString *_userID;
-    NSMutableSet *_upnpPortMappingsToRemove;
-    NSTimer *_upnpPortMapperTimer;
-    BOOL _ignoreNetworkChanges;
-    BOOL _refreshIsScheduled;
-    NSString *_appIdentifier;
-}
+@interface TCMPortMapper : NSObject
 
 + (TCMPortMapper *)sharedInstance;
 #if __has_feature(objc_class_property)
@@ -105,9 +86,9 @@ typedef NS_ENUM(NSInteger, TCMPortMappingTransportProtocol) {
 
 @property (nonatomic, copy, null_resettable) NSString *appIdentifier;
 
-/// will request the complete UPNPMappingTable and deliver it using a TCMPortMapperDidReceiveUPNPMappingTableNotification with "mappingTable" in the userInfo Dictionary (if current router is a UPNP router)
+/// will request the complete UPNPMappingTable and deliver it using a \c TCMPortMapperDidReceiveUPNPMappingTableNotification with "mappingTable" in the \c userInfo Dictionary (if current router is a UPNP router)
 - (void)requestUPNPMappingTable;
-/// this is mainly for Port Map.app and can remove any mappings that can be removed using UPNP (including mappings from other hosts). aMappingList is an Array of Dictionaries with the key @"protocol" and @"publicPort".
+/// this is mainly for Port Map.app and can remove any mappings that can be removed using UPNP (including mappings from other hosts). \c aMappingList is an Array of Dictionaries with the key @"protocol" and @"publicPort".
 - (void)removeUPNPMappings:(NSArray<NSDictionary<NSString*,id>*> *)aMappingList;
 
 /// needed for generating a UPNP port mapping description that differs for each user

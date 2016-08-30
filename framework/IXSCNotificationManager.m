@@ -12,14 +12,13 @@
  * @abstract       Callback for the dynamic store, just calls keysChanged: on 
  *                 the notification center.
  */
-void _IXSCNotificationCallback( SCDynamicStoreRef store, CFArrayRef changedKeys, void *info ) {	
-	NSEnumerator *keysE = [(NSArray *)CFBridgingRelease(changedKeys) objectEnumerator];
-	NSString *key = nil;
+static void _IXSCNotificationCallback( SCDynamicStoreRef store, CFArrayRef changedKeys, void *info ) {
+    NSArray *changedNSKeys = (__bridge NSArray *)changedKeys;
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	while ( key = [keysE nextObject] ) {		
+	for (NSString *key in changedNSKeys) {
 		[nc postNotificationName:key 
-							object:(id)CFBridgingRelease(info) 
-						  userInfo:(NSDictionary *)CFBridgingRelease(SCDynamicStoreCopyValue(store, (CFStringRef) key))];
+						  object:(__bridge id)info
+						userInfo:(NSDictionary *)CFBridgingRelease(SCDynamicStoreCopyValue(store, (CFStringRef) key))];
 	}
 }
 
@@ -48,10 +47,10 @@ void _IXSCNotificationCallback( SCDynamicStoreRef store, CFArrayRef changedKeys,
 			&context
 		);
 		
-		rlSrc = SCDynamicStoreCreateRunLoopSource(NULL,dynStore,0);
+		rlSrc = SCDynamicStoreCreateRunLoopSource(NULL, dynStore, 0);
 		CFRunLoopAddSource([[NSRunLoop currentRunLoop] getCFRunLoop], rlSrc, kCFRunLoopCommonModes);
 		
-		[self setObservedKeys:nil regExes:[NSArray arrayWithObject:@".*"]];
+		[self setObservedKeys:nil regExes:@[@".*"]];
 	}
 	
 	return self;
@@ -61,7 +60,6 @@ void _IXSCNotificationCallback( SCDynamicStoreRef store, CFArrayRef changedKeys,
 	CFRunLoopRemoveSource([[NSRunLoop currentRunLoop] getCFRunLoop], rlSrc, kCFRunLoopCommonModes);
 	CFRelease(rlSrc);
 	CFRelease(dynStore);
-
 }
 
 @end

@@ -67,8 +67,7 @@
 - (void)writeMappingDefaults {
     NSEnumerator *mappings = [[O_mappingsArrayController arrangedObjects] objectEnumerator];
     NSMutableArray *mappingsToStore = [NSMutableArray array];
-    TCMPortMapping *mapping = nil;
-    while ((mapping=[mappings nextObject])) {
+    for (TCMPortMapping *mapping in mappings) {
         [mappingsToStore addObject:[mapping dictionaryRepresentation]];
     }
     [[NSUserDefaults standardUserDefaults] setObject:mappingsToStore forKey:@"StoredMappings"];
@@ -103,9 +102,9 @@
     TCMPortMapper *pm=[TCMPortMapper sharedInstance];
     if ([pm isRunning]) {
         if ([pm externalIPAddress]) {
-            [O_taglineTextField setStringValue:[NSString stringWithFormat:@"%@ - %@ - %@",[pm mappingProtocol],[pm routerName],[pm routerIPAddress]]];
+            [O_taglineTextField setStringValue:[NSString stringWithFormat:@"%@ - %@ - %@", [pm mappingProtocol], [pm routerName], [pm routerIPAddress]]];
         } else {
-            [O_taglineTextField setStringValue:[NSString stringWithFormat:@"%@ - %@ - %@",[pm mappingProtocol],[pm routerName],[pm routerIPAddress]?[pm routerIPAddress]:NSLocalizedString(@"No Router",@"")]];
+            [O_taglineTextField setStringValue:[NSString stringWithFormat:@"%@ - %@ - %@", [pm mappingProtocol], [pm routerName], [pm routerIPAddress]?[pm routerIPAddress]:NSLocalizedString(@"No Router",@"")]];
         }
     } else {
         [O_taglineTextField setStringValue:NSLocalizedString(@"Stopped",@"")];
@@ -190,7 +189,7 @@
 - (void)stopProgressIndicator:(NSNotification *)aNotification {
     [O_globalProgressIndicator stopAnimation:self];
     [O_UPNPTabItemProgressIndicator stopAnimation:self];
-    [O_showUPNPMappingTableButton setEnabled:[[TCMPortMapper sharedInstance] mappingProtocol] == TCMUPNPPortMapProtocol];
+    [O_showUPNPMappingTableButton setEnabled:[[[TCMPortMapper sharedInstance] mappingProtocol] isEqualToString:TCMUPNPPortMapProtocol]];
     NSString *localIPAddress = [[TCMPortMapper sharedInstance] localIPAddress];
  	if (!localIPAddress) {
 		[[O_currentIPTextField window] setTitle:@"Port Map"];

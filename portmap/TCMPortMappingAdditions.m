@@ -10,12 +10,12 @@
     return mapping;
 }
 - (NSDictionary *)dictionaryRepresentation {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-    [self userInfo],@"userInfo",
-    [NSNumber numberWithInt:_localPort],@"privatePort",
-    [NSNumber numberWithInt:_desiredExternalPort],@"desiredPublicPort",
-    [NSNumber numberWithInt:_transportProtocol],@"transportProtocol",
-    nil];
+    return @{
+             @"userInfo": [self userInfo],
+             @"privatePort": @(_localPort),
+             @"desiredPublicPort": @(_desiredExternalPort),
+             @"transportProtocol": @(_transportProtocol),
+             };
 }
 
 
