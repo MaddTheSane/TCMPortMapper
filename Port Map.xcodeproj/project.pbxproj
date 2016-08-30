@@ -455,6 +455,7 @@
 			name = miniupnpc;
 			path = framework/miniupnp/miniupnpc;
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		F2301B0B0D685C1B00728699 /* man3 */ = {
 			isa = PBXGroup;

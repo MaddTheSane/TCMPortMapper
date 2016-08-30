@@ -147,7 +147,7 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
         char externalIPAddress[16];
         BOOL didFail=NO;
         NSString *errorString = nil;
-        if (( devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0, 0, 0,NULL) )) {
+        if (( devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0, 0, 50, NULL) )) {
             if(devlist) {
             
                 // let us check all of the devices for reachability
@@ -212,7 +212,7 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
                             if(externalIPAddress[0]) {
                                 NSString *ipString = [NSString stringWithUTF8String:externalIPAddress];
                                 NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:ipString forKey:@"externalIPAddress"];
-                                NSString *routerName = [NSString stringWithUTF8String:_igddata.cureltname];
+                                NSString *routerName = [NSString stringWithUTF8String:_igddata.modeldescription];
                                 if (routerName) [userInfo setObject:routerName forKey:@"routerName"];
                                 [[NSNotificationCenter defaultCenter] postNotificationOnMainThread:[NSNotification notificationWithName:TCMUPNPPortMapperDidGetExternalIPAddressNotification object:self userInfo:userInfo]];
                                 foundIDGDevice = YES;
