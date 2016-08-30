@@ -174,7 +174,7 @@
 		F2143AD90D881D9D00C91B69 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = /usr/lib/libssl.dylib; sourceTree = "<absolute>"; };
 		F214E5DB0D5F5FE600A06962 /* NATEcho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NATEcho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F214E5DD0D5F5FE600A06962 /* NATEcho-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "NATEcho-Info.plist"; path = "natecho/NATEcho-Info.plist"; sourceTree = "<group>"; };
-		F214E5FC0D5F62F700A06962 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = natecho/en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F214E5FC0D5F62F700A06962 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = natecho/en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F214E6060D5F646E00A06962 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = natecho/main.m; sourceTree = "<group>"; };
 		F214E6070D5F646E00A06962 /* natecho_prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = natecho_prefix.pch; path = natecho/natecho_prefix.pch; sourceTree = "<group>"; };
 		F214E60A0D5F64BF00A06962 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = natecho/AppController.h; sourceTree = "<group>"; };
@@ -224,17 +224,17 @@
 		F2482BA80D58A15F002DF811 /* TCMStatusImageFromMappingStatusValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCMStatusImageFromMappingStatusValueTransformer.m; path = portmap/TCMStatusImageFromMappingStatusValueTransformer.m; sourceTree = "<group>"; };
 		F2482BB90D58ABFA002DF811 /* TCMPortStringFromPublicPortValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCMPortStringFromPublicPortValueTransformer.h; path = portmap/TCMPortStringFromPublicPortValueTransformer.h; sourceTree = "<group>"; };
 		F2482BBA0D58ABFA002DF811 /* TCMPortStringFromPublicPortValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCMPortStringFromPublicPortValueTransformer.m; path = portmap/TCMPortStringFromPublicPortValueTransformer.m; sourceTree = "<group>"; };
-		F27B83B50ED94616008E1983 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = portmap/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F27B83B50ED94616008E1983 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = portmap/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F290D6150EDAC1B200E643C0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		F290D6330EDAC44000E643C0 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = portmap/dsa_pub.pem; sourceTree = "<group>"; };
 		F290D63C0EDAEBFB00E643C0 /* portmap_releasenotes.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = portmap_releasenotes.css; path = portmap/htdocs/portmap_releasenotes.css; sourceTree = "<group>"; };
 		F290D63D0EDAEBFB00E643C0 /* portmap_releasenotes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = portmap_releasenotes.html; path = portmap/htdocs/portmap_releasenotes.html; sourceTree = "<group>"; };
 		F29472860ED3091000DEBA97 /* build.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build.bat; sourceTree = "<group>"; };
 		F29472870ED3091000DEBA97 /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Changelog.txt; sourceTree = "<group>"; };
-		F29472880ED3091000DEBA97 /* declspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = declspec.h; sourceTree = "<group>"; };
+		F29472880ED3091000DEBA97 /* natpmp_declspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = natpmp_declspec.h; sourceTree = "<group>"; };
 		F29472890ED3091000DEBA97 /* getgateway.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = getgateway.c; sourceTree = "<group>"; };
 		F294728A0ED3091000DEBA97 /* getgateway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getgateway.h; sourceTree = "<group>"; };
-		F294728B0ED3091000DEBA97 /* LICENCE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENCE; sourceTree = "<group>"; };
+		F294728B0ED3091000DEBA97 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F294728C0ED3091000DEBA97 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		F294728D0ED3091000DEBA97 /* natpmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = natpmp.c; sourceTree = "<group>"; };
 		F294728E0ED3091000DEBA97 /* natpmp.def */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = natpmp.def; sourceTree = "<group>"; };
@@ -261,8 +261,8 @@
 		F2C6602F0D50C59B00820CAE /* On20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = On20.png; path = portmap/artwork/On20.png; sourceTree = "<group>"; };
 		F2C660300D50C59B00820CAE /* Off20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Off20.png; path = portmap/artwork/Off20.png; sourceTree = "<group>"; };
 		F2C660320D50C59B00820CAE /* PortMap.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = PortMap.icns; path = portmap/artwork/PortMap.icns; sourceTree = "<group>"; };
-		F2C6603C0D50C62F00820CAE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = portmap/en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		F2C6603E0D50C62F00820CAE /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = portmap/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F2C6603C0D50C62F00820CAE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = portmap/en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F2C6603E0D50C62F00820CAE /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = portmap/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F2CDB8FA0D65D82900B6A4E7 /* OUItoCompany.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = OUItoCompany.plist; path = framework/OUItoCompany.plist; sourceTree = "<group>"; };
 		F2D731CF0D5B607D00CBD1D8 /* TCMPortMappingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCMPortMappingAdditions.h; path = portmap/TCMPortMappingAdditions.h; sourceTree = "<group>"; };
 		F2D731D00D5B607D00CBD1D8 /* TCMPortMappingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCMPortMappingAdditions.m; path = portmap/TCMPortMappingAdditions.m; sourceTree = "<group>"; };
@@ -453,10 +453,10 @@
 			children = (
 				F29472860ED3091000DEBA97 /* build.bat */,
 				F29472870ED3091000DEBA97 /* Changelog.txt */,
-				F29472880ED3091000DEBA97 /* declspec.h */,
+				F29472880ED3091000DEBA97 /* natpmp_declspec.h */,
 				F29472890ED3091000DEBA97 /* getgateway.c */,
 				F294728A0ED3091000DEBA97 /* getgateway.h */,
-				F294728B0ED3091000DEBA97 /* LICENCE */,
+				F294728B0ED3091000DEBA97 /* LICENSE */,
 				F294728C0ED3091000DEBA97 /* Makefile */,
 				F294728D0ED3091000DEBA97 /* natpmp.c */,
 				F294728E0ED3091000DEBA97 /* natpmp.def */,
@@ -877,7 +877,7 @@
 		F214E5FB0D5F62F700A06962 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F214E5FC0D5F62F700A06962 /* English */,
+				F214E5FC0D5F62F700A06962 /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -885,7 +885,7 @@
 		F27B83B40ED94616008E1983 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F27B83B50ED94616008E1983 /* English */,
+				F27B83B50ED94616008E1983 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -893,7 +893,7 @@
 		F2C6603B0D50C62F00820CAE /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F2C6603C0D50C62F00820CAE /* English */,
+				F2C6603C0D50C62F00820CAE /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -901,7 +901,7 @@
 		F2C6603D0D50C62F00820CAE /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F2C6603E0D50C62F00820CAE /* English */,
+				F2C6603E0D50C62F00820CAE /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
