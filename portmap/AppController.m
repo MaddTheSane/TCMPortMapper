@@ -133,7 +133,7 @@
 }
 
 - (IBAction)togglePortMapper:(id)aSender {
-    if ([aSender state]==NSOnState) {
+    if ([aSender state] == NSOnState) {
         [[TCMPortMapper sharedInstance] start];
     } else {
         [[TCMPortMapper sharedInstance] stop];
@@ -206,9 +206,11 @@
 - (IBAction)addMappingEndSheet:(id)aSender {
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"active",[O_addDescriptionField stringValue],@"mappingTitle",[O_addReferenceStringField stringValue],@"referenceString",nil];
     TCMPortMapping *mapping = [TCMPortMapping portMappingWithLocalPort:[O_addLocalPortField intValue] desiredExternalPort:[O_addDesiredField intValue] transportProtocol:TCMPortMappingTransportProtocolTCP userInfo:userInfo];
-    int transportProtocol = 0;
-    if ([O_addProtocolTCPButton state] == NSOnState) transportProtocol+=TCMPortMappingTransportProtocolTCP;
-    if ([O_addProtocolUDPButton state] == NSOnState) transportProtocol+=TCMPortMappingTransportProtocolUDP;
+    TCMPortMappingTransportProtocol transportProtocol = 0;
+    if ([O_addProtocolTCPButton state] == NSOnState)
+        transportProtocol |= TCMPortMappingTransportProtocolTCP;
+    if ([O_addProtocolUDPButton state] == NSOnState)
+        transportProtocol |= TCMPortMappingTransportProtocolUDP;
     [mapping setTransportProtocol:transportProtocol];
     [mapping addObserver:self forKeyPath:@"userInfo.active" options:0 context:nil];
     [O_mappingsArrayController addObject:mapping];
@@ -259,7 +261,7 @@
 - (IBAction)removeMapping:(id)aSender {
     NSEnumerator *mappings = [[O_mappingsArrayController selectedObjects] objectEnumerator];
     TCMPortMapping *mapping = nil;
-    while ((mapping=[mappings nextObject])) {
+    for (mapping in mappings) {
         if ([[[mapping userInfo] objectForKey:@"active"] boolValue]) {
             [[TCMPortMapper sharedInstance] removePortMapping:mapping];
         }

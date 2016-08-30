@@ -25,7 +25,12 @@ NSString * const TCMUPNPPortMapperDidGetExternalIPAddressNotification = @"TCMNAT
 NSString * const TCMUPNPPortMapperDidBeginWorkingNotification =@"TCMUPNPPortMapperDidBeginWorkingNotification";
 NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapperDidEndWorkingNotification";
 
+@interface TCMUPNPPortMapper ()
+@property (readwrite, copy) NSArray<NSDictionary<NSString*,id>*> *latestUPNPPortMappingsList;
+@end
+
 @implementation TCMUPNPPortMapper
+@synthesize latestUPNPPortMappingsList = _latestUPNPPortMappingsList;
 
 - (id)init {
     if ((self=[super init])) {
@@ -39,19 +44,6 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
     }
     return self;
 }
-
-
-- (void)setLatestUPNPPortMappingsList:(NSArray *)aLatestList {
-    if (aLatestList != _latestUPNPPortMappingsList) {
-        _latestUPNPPortMappingsList = aLatestList;
-            //[tmp autorelease];
-    }
-}
-
-- (NSArray *)latestUPNPPortMappingsList {
-    return _latestUPNPPortMappingsList;
-}
-
 
 - (void)refresh {
     if ([_threadIsRunningLock tryLock]) {
@@ -97,7 +89,7 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
 		[descriptionComponents removeAllObjects];
 		// there seems to be a hard limit of 40 characters at in the vigor routers - so length is of essence
 		// however since there seems to be a hard limit of 11 at at least one other router we need to take further action
-		int maxLength = 40;
+		NSInteger maxLength = 40;
 		maxLength -= [prefix length];
 		maxLength -= [userID length];
 		maxLength -= 2;
@@ -202,9 +194,7 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
                         }
                     }
                 }
-                NSEnumerator *URLEnumerator = [URLsToTry objectEnumerator];
-                NSURL *descURL = nil;
-                while ((descURL = [URLEnumerator nextObject])) {
+                for (NSURL *descURL in URLsToTry) {
 #ifndef NDEBUG
                     NSLog(@"UPnP: trying URL:%@",descURL);
 #endif
@@ -299,8 +289,8 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
         [aPortMapping setMappingStatus:TCMPortMappingStatusUnmapped];
         return YES;
     } else { // We should add it
-        int mappedPort = [aPortMapping desiredExternalPort];
-        int protocol = TCMPortMappingTransportProtocolUDP;
+        unsigned short mappedPort = [aPortMapping desiredExternalPort];
+        TCMPortMappingTransportProtocol protocol = TCMPortMappingTransportProtocolUDP;
         for (protocol = TCMPortMappingTransportProtocolUDP; protocol <= TCMPortMappingTransportProtocolTCP; protocol++) {
             if ([aPortMapping transportProtocol] & protocol) {
                 int r = 0;
@@ -366,7 +356,7 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
         NSMutableIndexSet *reservedPortNumbers = [NSMutableIndexSet new];
         // get port mapping list as reference first
         NSMutableArray *latestUPNPPortMappingsList = [NSMutableArray array];
-{
+    {
         int r;
         int i = 0;
         char index[6];
@@ -403,9 +393,9 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
                 int publicPort = atoi(extPort);
                 [latestUPNPPortMappingsList addObject:[NSDictionary dictionaryWithObjectsAndKeys:
                         ipAddress,@"ipAddress",
-                        [NSNumber numberWithInt:localPort],@"localPort",
-                        [NSNumber numberWithInt:publicPort],@"publicPort",
-                        [NSString stringWithUTF8String:protocol],@"protocol",
+                        @(localPort),@"localPort",
+                        @(publicPort),@"publicPort",
+                        @(protocol),@"protocol",
                         portMappingDescription,@"description",
                     nil]
                 ];
@@ -447,8 +437,8 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
         } while(r==UPNPCOMMAND_SUCCESS && 
                 !UpdatePortMappingsThreadShouldQuit && 
                 !UpdatePortMappingsThreadShouldRestart);
-        [self setLatestUPNPPortMappingsList:latestUPNPPortMappingsList];
-}
+        self.latestUPNPPortMappingsList = latestUPNPPortMappingsList;
+    }
 
 
         while (!UpdatePortMappingsThreadShouldQuit && !UpdatePortMappingsThreadShouldRestart) {
@@ -513,7 +503,7 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
             
             if (!mappingToApply) break;
             
-            if (![self applyPortMapping:mappingToApply remove:[pm isRunning]?NO:YES UPNPURLs:&_urls IGDDatas:&_igddata reservedExternalPortNumbers:reservedPortNumbers]) {
+            if (![self applyPortMapping:mappingToApply remove:!pm.running UPNPURLs:&_urls IGDDatas:&_igddata reservedExternalPortNumbers:reservedPortNumbers]) {
                 didFail = YES;
                 [[NSNotificationCenter defaultCenter] postNotificationOnMainThread:[NSNotification notificationWithName:TCMUPNPPortMapperDidFailNotification object:self]];
                 break;
@@ -548,7 +538,7 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
         TCMPortMapping *mapping = nil;
         while ((mapping = [mappings nextObject])) {
             if ([mapping mappingStatus] == TCMPortMappingStatusMapped) {
-            	int protocol = TCMPortMappingTransportProtocolUDP;
+            	TCMPortMappingTransportProtocol protocol = TCMPortMappingTransportProtocolUDP;
 		        for (protocol = TCMPortMappingTransportProtocolUDP; protocol <= TCMPortMappingTransportProtocolTCP; protocol++) {
 		        	if (protocol & [mapping transportProtocol]) {
 						UPNP_DeletePortMapping(_urls.controlURL, _igddata.servicetype, 

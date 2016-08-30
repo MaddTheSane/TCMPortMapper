@@ -25,7 +25,7 @@ extern NSString * const TCMUPNPPortMapperDidEndWorkingNotification;
     BOOL UpdatePortMappingsThreadShouldQuit;
     BOOL UpdatePortMappingsThreadShouldRestart;
     TCMPortMappingThreadID runningThreadID;
-    NSArray *_latestUPNPPortMappingsList;
+    NSArray<NSDictionary<NSString*,id>*> *_latestUPNPPortMappingsList;
     struct UPNPUrls _urls;
     struct IGDdatas _igddata;
 }
@@ -34,6 +34,6 @@ extern NSString * const TCMUPNPPortMapperDidEndWorkingNotification;
 - (void)updatePortMappings;
 - (void)stop;
 - (void)stopBlocking;
-- (NSArray *)latestUPNPPortMappingsList;
+@property (readonly, copy) NSArray<NSDictionary<NSString*,id>*> *latestUPNPPortMappingsList;
 
 @end

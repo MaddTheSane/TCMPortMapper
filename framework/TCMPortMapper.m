@@ -95,7 +95,6 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
     return self;
 }
 
-
 - (void)setMappingStatus:(TCMPortMappingStatus)aStatus {
     if (_mappingStatus != aStatus) {
         _mappingStatus = aStatus;
@@ -156,6 +155,7 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
 @synthesize running = _isRunning;
 @synthesize routerName = _routerName;
 @synthesize mappingProtocol = _mappingProtocol;
+@synthesize removeMappingQueue = _removeMappingQueue;
 
 + (TCMPortMapper *)sharedInstance
 {
@@ -250,7 +250,6 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
     }
 }
 
-
 - (NSString *)localBonjourHostName {
     SCDynamicStoreRef dynRef = SCDynamicStoreCreate(kCFAllocatorSystemDefault, (CFStringRef)@"TCMPortMapper", NULL, NULL); 
     NSString *hostname = (NSString *)CFBridgingRelease(SCDynamicStoreCopyLocalHostName(dynRef));
@@ -337,8 +336,6 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
     return [_portMappings copy];
 }
 
-@synthesize removeMappingQueue = _removeMappingQueue;
-
 - (NSMutableSet *)_upnpPortMappingsToRemove {
     return _upnpPortMappingsToRemove;
 }
@@ -362,7 +359,6 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
 - (void)removePortMapping:(TCMPortMapping *)aMapping {
     if (aMapping) {
         @synchronized(_portMappings) {
-                //[[aMapping retain] autorelease];
             [_portMappings removeObject:aMapping];
         }
         @synchronized(_removeMappingQueue) {

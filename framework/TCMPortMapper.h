@@ -31,13 +31,13 @@ extern NSString * const TCMNATPMPPortMapProtocol;
 extern NSString * const TCMUPNPPortMapProtocol;  
 extern NSString * const TCMNoPortMapProtocol;
 
-typedef NS_ENUM(NSInteger, TCMPortMappingStatus) {
+typedef NS_ENUM(char, TCMPortMappingStatus) {
     TCMPortMappingStatusUnmapped = 0,
     TCMPortMappingStatusTrying   = 1,
     TCMPortMappingStatusMapped   = 2
 };
 
-typedef NS_OPTIONS(NSInteger, TCMPortMappingTransportProtocol) {
+typedef NS_OPTIONS(unsigned char, TCMPortMappingTransportProtocol) {
     TCMPortMappingTransportProtocolUDP  = 1,
     TCMPortMappingTransportProtocolTCP  = 2,
     TCMPortMappingTransportProtocolBoth = 3
@@ -48,11 +48,11 @@ typedef NS_OPTIONS(NSInteger, TCMPortMappingTransportProtocol) {
     unsigned short _localPort;
     unsigned short _externalPort;
     unsigned short _desiredExternalPort;
-    id  _userInfo;
     TCMPortMappingStatus _mappingStatus;
     TCMPortMappingTransportProtocol _transportProtocol;
+    id  _userInfo;
 }
-+ (instancetype)portMappingWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(nullable id)aUserInfo NS_SWIFT_UNAVAILABLE("Use TCMPortMapping(localPort:desiredExternalPort:transportProtocol:userInfo: instead");
++ (instancetype)portMappingWithLocalPort:(int)aPrivatePort desiredExternalPort:(int)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(nullable id)aUserInfo NS_SWIFT_UNAVAILABLE("Use TCMPortMapping(localPort:desiredExternalPort:transportProtocol:userInfo:) instead");
 - (instancetype)initWithLocalPort:(unsigned short)aPrivatePort desiredExternalPort:(unsigned short)aPublicPort transportProtocol:(TCMPortMappingTransportProtocol)aTransportProtocol userInfo:(nullable id)aUserInfo;
 @property (readonly) unsigned short desiredExternalPort;
 @property (readonly, retain, nullable) id userInfo;
@@ -71,6 +71,8 @@ typedef NS_OPTIONS(NSInteger, TCMPortMappingTransportProtocol) {
 #endif
 + (nullable NSString *)manufacturerForHardwareAddress:(NSString *)aMACAddress;
 + (NSString *)sizereducableHashOfString:(NSString *)inString;
+
+- (instancetype)init NS_SWIFT_UNAVAILABLE("Use TCMPortMapping.sharedInstance instead");
 
 @property (readonly, copy) NSSet<TCMPortMapping*> *portMappings;
 @property (readonly, strong) NSMutableSet<TCMPortMapping*> *removeMappingQueue;
