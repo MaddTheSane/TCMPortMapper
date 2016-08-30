@@ -175,7 +175,7 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
     if ((self=[super init])) {
         _systemConfigNotificationManager = [[IXSCNotificationManager alloc] init];
         // since we are only interested in this specific key, let us configure it so.
-        [_systemConfigNotificationManager setObservedKeys:[NSArray arrayWithObject:@"State:/Network/Global/IPv4"] regExes:nil];
+        [_systemConfigNotificationManager setObservedKeys:@[@"State:/Network/Global/IPv4"] regExes:nil];
         _isRunning = NO;
         _ignoreNetworkChanges = NO;
         _refreshIsScheduled = NO;
