@@ -45,7 +45,7 @@ static void readData (
     NSString *addressAsString = nil;
     if (socketAddress->sa_family == AF_INET) {
         if (inet_ntop(AF_INET, &(((struct sockaddr_in *)socketAddress)->sin_addr), stringBuffer, INET_ADDRSTRLEN)) {
-            addressAsString = [NSString stringWithUTF8String:stringBuffer];
+            addressAsString = @(stringBuffer);
         } else {
             addressAsString = @"IPv4 un-ntopable";
         }
@@ -53,7 +53,7 @@ static void readData (
             addressAsString = [addressAsString stringByAppendingFormat:@":%d", port];
     } else if (socketAddress->sa_family == AF_INET6) {
          if (inet_ntop(AF_INET6, &(((struct sockaddr_in6 *)socketAddress)->sin6_addr), stringBuffer, INET6_ADDRSTRLEN)) {
-            addressAsString = [NSString stringWithUTF8String:stringBuffer];
+            addressAsString = @(stringBuffer);
         } else {
             addressAsString = @"IPv6 un-ntopable";
         }
@@ -62,7 +62,7 @@ static void readData (
         // Suggested IPv6 format (see http://www.faqs.org/rfcs/rfc2732.html)
         char interfaceName[IF_NAMESIZE];
         if ([addressAsString hasPrefix:@"fe80"] && if_indextoname(((struct sockaddr_in6 *)socketAddress)->sin6_scope_id,interfaceName)) {
-            NSString *zoneID = [NSString stringWithUTF8String:interfaceName];
+            NSString *zoneID = @(interfaceName);
             addressAsString = [NSString stringWithFormat:@"[%@%%%@]:%d", addressAsString, zoneID, port];
         } else {
             addressAsString = [NSString stringWithFormat:@"[%@]:%d", addressAsString, port];
@@ -553,7 +553,7 @@ static void readData (
         char buffer[INET_ADDRSTRLEN];
         unsigned char *bytes = (unsigned char *)[data bytes];
         inet_ntop(AF_INET, &(bytes[8]), buffer, INET_ADDRSTRLEN);
-        NSString *newIPAddress = [NSString stringWithUTF8String:buffer];
+        NSString *newIPAddress = @(buffer);
         int secondsSinceEpoch = ntohl(*((int32_t *)&(bytes[4])));
 #ifndef NDEBUG
         NSLog(@"%s sender:%@ new:%@ seconds:%d",__FUNCTION__,senderAddressAndPort, newIPAddress, secondsSinceEpoch);

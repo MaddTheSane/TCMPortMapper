@@ -159,7 +159,7 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
                 NSMutableArray *URLsToTry = [NSMutableArray array];
                 NSMutableSet *triedURLSet = [NSMutableSet set];
                 for(device = devlist; device && !foundIDGDevice; device = device->pNext) {
-                    NSURL *descURL = [NSURL URLWithString:[NSString stringWithUTF8String:device->descURL]];
+                    NSURL *descURL = [NSURL URLWithString:@(device->descURL)];
                     SCNetworkConnectionFlags status = 0;
                     Boolean success = 0;
                     const char *name = [[descURL host] UTF8String];
@@ -210,9 +210,9 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
                             errorString = [NSString stringWithFormat:@"GetExternalIPAddress() returned %d", r];
                         } else {
                             if(externalIPAddress[0]) {
-                                NSString *ipString = [NSString stringWithUTF8String:externalIPAddress];
+                                NSString *ipString = @(externalIPAddress);
                                 NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:ipString forKey:@"externalIPAddress"];
-                                NSString *routerName = [NSString stringWithUTF8String:_igddata.modeldescription];
+                                NSString *routerName = @(_igddata.modeldescription);
                                 if (routerName) [userInfo setObject:routerName forKey:@"routerName"];
                                 [[NSNotificationCenter defaultCenter] postNotificationOnMainThread:[NSNotification notificationWithName:TCMUPNPPortMapperDidGetExternalIPAddressNotification object:self userInfo:userInfo]];
                                 foundIDGDevice = YES;
@@ -387,21 +387,21 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
                        i, protocol, extPort, intClient, intPort,
                        desc, rHost);
 #endif
-                NSString *ipAddress = [NSString stringWithUTF8String:intClient];
-                NSString *portMappingDescription = [NSString stringWithUTF8String:desc];
+                NSString *ipAddress = @(intClient);
+                NSString *portMappingDescription = @(desc);
                 int localPort = atoi(intPort);
                 int publicPort = atoi(extPort);
                 [latestUPNPPortMappingsList addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                        ipAddress,@"ipAddress",
-                        @(localPort),@"localPort",
-                        @(publicPort),@"publicPort",
-                        @(protocol),@"protocol",
-                        portMappingDescription,@"description",
+                        ipAddress, @"ipAddress",
+                        @(localPort), @"localPort",
+                        @(publicPort), @"publicPort",
+                        @(protocol), @"protocol",
+                        portMappingDescription, @"description",
                     nil]
                 ];
                 if ([self doesPortMappingDescriptionBelongToMe:portMappingDescription] && 
                     [ipAddress isEqualToString:[pm localIPAddress]]) {
-                    NSString *transportProtocol = [NSString stringWithUTF8String:protocol];
+                    NSString *transportProtocol = @(protocol);
                     // check if we want this mapping, if not remove it, if yes set mapping status
                     BOOL isWanted = NO;
                     @synchronized (mappingsToAdd) {
