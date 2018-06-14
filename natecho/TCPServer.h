@@ -47,7 +47,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreServices/CoreServices.h>
 
-extern NSString * const TCPServerErrorDomain;
+extern NSErrorDomain const TCPServerErrorDomain;
 
 typedef NS_ERROR_ENUM(TCPServerErrorDomain, TCPServerErrorCode) {
     kTCPServerCouldNotBindToIPv4Address = 1,
@@ -59,7 +59,7 @@ typedef NS_ERROR_ENUM(TCPServerErrorDomain, TCPServerErrorCode) {
 
 @interface TCPServer : NSObject {
 @private
-    __unsafe_unretained id<TCPServerDelegate> delegate;
+    __weak id<TCPServerDelegate> delegate;
     NSString *domain;
     NSString *name;
     NSString *type;
@@ -69,7 +69,7 @@ typedef NS_ERROR_ENUM(TCPServerErrorDomain, TCPServerErrorCode) {
     NSNetService *netService;
 }
 
-@property (unsafe_unretained) id<TCPServerDelegate> delegate;
+@property (weak) id<TCPServerDelegate> delegate;
 @property (copy) NSString *domain;
 @property (copy, setter=setTcpServerName:) NSString *name;
 @property (copy) NSString *type;

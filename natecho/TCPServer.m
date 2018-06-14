@@ -64,10 +64,6 @@ NSString * const TCPServerErrorDomain = @"TCPServerErrorDomain";
 
 - (void)dealloc {
     [self stop];
-    [domain release];
-    [name release];
-    [type release];
-    [super dealloc];
 }
 
 - (void)handleNewConnectionFromAddress:(NSData *)addr inputStream:(NSInputStream *)istr outputStream:(NSOutputStream *)ostr {
@@ -81,7 +77,7 @@ NSString * const TCPServerErrorDomain = @"TCPServerErrorDomain";
 // We gather some data here, and convert the function call to a method
 // invocation on TCPServer.
 static void TCPServerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType type, CFDataRef address, const void *data, void *info) {
-    TCPServer *server = (TCPServer *)info;
+    TCPServer *server = (__bridge TCPServer *)info;
     if (kCFSocketAcceptCallBack == type) { 
         // for an AcceptCallBack, the data parameter is a pointer to a CFSocketNativeHandle
         CFSocketNativeHandle nativeSocketHandle = *(CFSocketNativeHandle *)data;
@@ -97,7 +93,7 @@ static void TCPServerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType typ
         if (readStream && writeStream) {
             CFReadStreamSetProperty(readStream, kCFStreamPropertyShouldCloseNativeSocket, kCFBooleanTrue);
             CFWriteStreamSetProperty(writeStream, kCFStreamPropertyShouldCloseNativeSocket, kCFBooleanTrue);
-            [server handleNewConnectionFromAddress:peer inputStream:(NSInputStream *)readStream outputStream:(NSOutputStream *)writeStream];
+            [server handleNewConnectionFromAddress:peer inputStream:(__bridge NSInputStream *)readStream outputStream:(__bridge NSOutputStream *)writeStream];
         } else {
             // on any failure, need to destroy the CFSocketNativeHandle 
             // since we are not going to use it any more
@@ -109,7 +105,7 @@ static void TCPServerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType typ
 }
 
 - (BOOL)start:(NSError **)error {
-    CFSocketContext socketCtxt = {0, self, NULL, NULL, NULL};
+    CFSocketContext socketCtxt = {0, (__bridge void *)(self), NULL, NULL, NULL};
     ipv4socket = CFSocketCreate(kCFAllocatorDefault, PF_INET, SOCK_STREAM, IPPROTO_TCP, kCFSocketAcceptCallBack, (CFSocketCallBack)&TCPServerAcceptCallBack, &socketCtxt);
     ipv6socket = CFSocketCreate(kCFAllocatorDefault, PF_INET6, SOCK_STREAM, IPPROTO_TCP, kCFSocketAcceptCallBack, (CFSocketCallBack)&TCPServerAcceptCallBack, &socketCtxt);
 
@@ -201,7 +197,6 @@ static void TCPServerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType typ
 
 - (BOOL)stop {
     [netService stop];
-    [netService release];
     netService = nil;
     if (ipv4socket) {
         CFSocketInvalidate(ipv4socket);
