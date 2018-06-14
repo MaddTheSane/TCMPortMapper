@@ -732,7 +732,7 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
     _workCount--;
     if (_workCount == 0) {
         if (_UPNPStatus == TCMPortMapProtocolWorks && _sendUPNPMappingTableNotification) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:TCMPortMapperDidReceiveUPNPMappingTableNotification object:self userInfo:[NSDictionary dictionaryWithObject:[_UPNPPortMapper latestUPNPPortMappingsList] forKey:@"mappingTable"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:TCMPortMapperDidReceiveUPNPMappingTableNotification object:self userInfo:@{@"mappingTable": [_UPNPPortMapper latestUPNPPortMappingsList]}];
             _sendUPNPMappingTableNotification = NO;
         }
     

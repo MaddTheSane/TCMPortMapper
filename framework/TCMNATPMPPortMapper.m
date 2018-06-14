@@ -461,7 +461,7 @@ Standardablauf:
 #ifndef NDEBUG
                     NSLog(@"NAT-PMP:  found IP:%@",ipString);
 #endif
-                    [[NSNotificationCenter defaultCenter] postNotificationOnMainThread:[NSNotification notificationWithName:TCMNATPMPPortMapperDidGetExternalIPAddressNotification object:self userInfo:[NSDictionary dictionaryWithObject:ipString forKey:@"externalIPAddress"]]];
+                    [[NSNotificationCenter defaultCenter] postNotificationOnMainThread:[NSNotification notificationWithName:TCMNATPMPPortMapperDidGetExternalIPAddressNotification object:self userInfo:@{@"externalIPAddress": ipString}]];
                 }
             }
         }
@@ -514,13 +514,13 @@ Standardablauf:
          _lastBroadcastedExternalIP = [anExternalIPAddress copy];
          _lastExternalIPSenderAddress = [aSenderAddressString copy];
         [[NSNotificationCenter defaultCenter] 
-            postNotificationName:TCMNATPMPPortMapperDidReceiveBroadcastedExternalIPChangeNotification 
-            object:self 
-            userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                        _lastBroadcastedExternalIP,@"externalIP",
-                        _lastExternalIPSenderAddress,@"senderAddress",
-                        [NSNumber numberWithInt:aSecondsSinceEpoch],@"secondsSinceStartOfEpoch",
-                      nil]
+         postNotificationName:TCMNATPMPPortMapperDidReceiveBroadcastedExternalIPChangeNotification
+         object:self
+         userInfo:@{
+                    @"externalIP": _lastBroadcastedExternalIP,
+                    @"senderAddress": _lastExternalIPSenderAddress,
+                    @"secondsSinceStartOfEpoch": @(aSecondsSinceEpoch),
+                    }
         ];
     }
 }

@@ -391,14 +391,13 @@ NSString * const TCMUPNPPortMapperDidEndWorkingNotification   =@"TCMUPNPPortMapp
                 NSString *portMappingDescription = @(desc);
                 int localPort = atoi(intPort);
                 int publicPort = atoi(extPort);
-                [latestUPNPPortMappingsList addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                        ipAddress, @"ipAddress",
-                        @(localPort), @"localPort",
-                        @(publicPort), @"publicPort",
-                        @(protocol), @"protocol",
-                        portMappingDescription, @"description",
-                    nil]
-                ];
+                [latestUPNPPortMappingsList addObject:
+                 @{
+                   @"ipAddress": ipAddress,
+                   @"localPort": @(localPort),
+                   @"publicPort": @(publicPort),
+                   @"protocol": @(protocol),
+                   @"description": portMappingDescription}];
                 if ([self doesPortMappingDescriptionBelongToMe:portMappingDescription] && 
                     [ipAddress isEqualToString:[pm localIPAddress]]) {
                     NSString *transportProtocol = @(protocol);
