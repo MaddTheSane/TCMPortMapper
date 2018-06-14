@@ -14,22 +14,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString * const TCMPortMapperExternalIPAddressDidChange;
+extern NSNotificationName const TCMPortMapperExternalIPAddressDidChange;
 
-extern NSString * const TCMPortMapperWillStartSearchForRouterNotification;
-extern NSString * const TCMPortMapperDidFinishSearchForRouterNotification;
+extern NSNotificationName const TCMPortMapperWillStartSearchForRouterNotification;
+extern NSNotificationName const TCMPortMapperDidFinishSearchForRouterNotification;
 
-extern NSString * const TCMPortMapperDidStartWorkNotification;
-extern NSString * const TCMPortMapperDidFinishWorkNotification;
+extern NSNotificationName const TCMPortMapperDidStartWorkNotification;
+extern NSNotificationName const TCMPortMapperDidFinishWorkNotification;
 
-extern NSString * const TCMPortMapperDidReceiveUPNPMappingTableNotification;
+extern NSNotificationName const TCMPortMapperDidReceiveUPNPMappingTableNotification;
 
-extern NSString * const TCMPortMappingDidChangeMappingStatusNotification;
+extern NSNotificationName const TCMPortMappingDidChangeMappingStatusNotification;
 
+typedef NSString *TCMPortMapProtocol NS_TYPED_ENUM;
 
-extern NSString * const TCMNATPMPPortMapProtocol;
-extern NSString * const TCMUPNPPortMapProtocol;  
-extern NSString * const TCMNoPortMapProtocol;
+extern TCMPortMapProtocol const TCMNATPMPPortMapProtocol NS_SWIFT_NAME(NATPMP);
+extern TCMPortMapProtocol const TCMUPNPPortMapProtocol NS_SWIFT_NAME(UPNP);
+extern TCMPortMapProtocol const TCMNoPortMapProtocol NS_SWIFT_NAME(none);
 
 typedef NS_ENUM(char, TCMPortMappingStatus) {
     TCMPortMappingStatusUnmapped = 0,
@@ -65,10 +66,7 @@ typedef NS_OPTIONS(unsigned char, TCMPortMappingTransportProtocol) {
 
 @interface TCMPortMapper : NSObject
 
-+ (TCMPortMapper *)sharedInstance;
-#if __has_feature(objc_class_property)
 @property (class, readonly, strong) TCMPortMapper *sharedInstance;
-#endif
 + (nullable NSString *)manufacturerForHardwareAddress:(NSString *)aMACAddress;
 + (NSString *)sizereducableHashOfString:(NSString *)inString;
 
@@ -102,7 +100,7 @@ typedef NS_OPTIONS(unsigned char, TCMPortMappingTransportProtocol) {
 @property (readonly, copy, nullable) NSString *externalIPAddress;
 @property (readonly, copy) NSString *localIPAddress;
 @property (readonly, copy) NSString *localBonjourHostName;
-@property (copy) NSString *mappingProtocol;
+@property (copy) TCMPortMapProtocol mappingProtocol;
 @property (copy, nullable) NSString *routerName;
 @property (readonly, copy) NSString *routerIPAddress;
 @property (readonly, copy) NSString *routerHardwareAddress;

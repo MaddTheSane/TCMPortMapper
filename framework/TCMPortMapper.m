@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
 
 @end
 
-@interface TCMPortMapper (Private) 
+@interface TCMPortMapper ()
 - (void)cleanupUPNPPortMapperTimer;
 - (void)setExternalIPAddress:(NSString *)anAddress;
 - (void)setLocalIPAddress:(NSString *)anAddress;
@@ -125,6 +125,7 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
 
 @interface TCMPortMapper ()
 @property (nonatomic, readwrite, copy) NSString *localIPAddress;
+@property (nonatomic, readwrite, copy, nullable) NSString *externalIPAddress;
 @end
 
 @implementation TCMPortMapper {
