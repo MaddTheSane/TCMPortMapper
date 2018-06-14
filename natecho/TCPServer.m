@@ -114,7 +114,7 @@ static void TCPServerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType typ
     ipv6socket = CFSocketCreate(kCFAllocatorDefault, PF_INET6, SOCK_STREAM, IPPROTO_TCP, kCFSocketAcceptCallBack, (CFSocketCallBack)&TCPServerAcceptCallBack, &socketCtxt);
 
     if (NULL == ipv4socket || NULL == ipv6socket) {
-        if (error) *error = [[NSError alloc] initWithDomain:TCPServerErrorDomain code:kTCPServerNoSocketsAvailable userInfo:nil];
+        if (error) *error = [NSError errorWithDomain:TCPServerErrorDomain code:kTCPServerNoSocketsAvailable userInfo:nil];
         if (ipv4socket) CFRelease(ipv4socket);
         if (ipv6socket) CFRelease(ipv6socket);
         ipv4socket = NULL;
@@ -136,7 +136,7 @@ static void TCPServerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType typ
     NSData *address4 = [NSData dataWithBytes:&addr4 length:sizeof(addr4)];
 
     if (kCFSocketSuccess != CFSocketSetAddress(ipv4socket, (CFDataRef)address4)) {
-        if (error) *error = [[NSError alloc] initWithDomain:TCPServerErrorDomain code:kTCPServerCouldNotBindToIPv4Address userInfo:nil];
+        if (error) *error = [NSError errorWithDomain:TCPServerErrorDomain code:kTCPServerCouldNotBindToIPv4Address userInfo:nil];
         if (ipv4socket) CFRelease(ipv4socket);
         if (ipv6socket) CFRelease(ipv6socket);
         ipv4socket = NULL;
@@ -147,7 +147,7 @@ static void TCPServerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType typ
     if (0 == port) {
         // now that the binding was successful, we get the port number 
         // -- we will need it for the v6 endpoint and for the NSNetService
-        NSData *addr = [(NSData *)CFSocketCopyAddress(ipv4socket) autorelease];
+        NSData *addr = CFBridgingRelease(CFSocketCopyAddress(ipv4socket));
         memcpy(&addr4, [addr bytes], [addr length]);
         port = ntohs(addr4.sin_port);
     }
@@ -162,7 +162,7 @@ static void TCPServerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType typ
     NSData *address6 = [NSData dataWithBytes:&addr6 length:sizeof(addr6)];
 
     if (kCFSocketSuccess != CFSocketSetAddress(ipv6socket, (CFDataRef)address6)) {
-        if (error) *error = [[NSError alloc] initWithDomain:TCPServerErrorDomain code:kTCPServerCouldNotBindToIPv6Address userInfo:nil];
+        if (error) *error = [NSError errorWithDomain:TCPServerErrorDomain code:kTCPServerCouldNotBindToIPv6Address userInfo:nil];
         if (ipv4socket) CFRelease(ipv4socket);
         if (ipv6socket) CFRelease(ipv6socket);
         ipv4socket = NULL;

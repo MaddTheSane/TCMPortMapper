@@ -47,13 +47,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreServices/CoreServices.h>
 
-NSString * const TCPServerErrorDomain;
+extern NSString * const TCPServerErrorDomain;
 
-typedef enum {
+typedef NS_ERROR_ENUM(TCPServerErrorDomain, TCPServerErrorCode) {
     kTCPServerCouldNotBindToIPv4Address = 1,
     kTCPServerCouldNotBindToIPv6Address = 2,
     kTCPServerNoSocketsAvailable = 3,
-} TCPServerErrorCode;
+};
 
 @protocol TCPServerDelegate;
 
