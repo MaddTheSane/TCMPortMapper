@@ -38,6 +38,7 @@
 		5590A56720D4F1EE0001CB58 /* Presets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2D731E90D5B768300CBD1D8 /* Presets.plist */; };
 		5590A56A20D4F21B0001CB58 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5590A56C20D4F21B0001CB58 /* Localizable.strings */; };
 		5590A56E20D4F2870001CB58 /* TCMPortMappingAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590A56D20D4F2870001CB58 /* TCMPortMappingAdditions.swift */; };
+		55B1CA8C20D57B5E00397B72 /* StatusImageFromMappingStatusValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B1CA8B20D57B5E00397B72 /* StatusImageFromMappingStatusValueTransformer.swift */; };
 		55BA917A1D76103B008610D7 /* portlistingparse.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BA91781D76103B008610D7 /* portlistingparse.c */; };
 		55BA917B1D76103B008610D7 /* portlistingparse.h in Headers */ = {isa = PBXBuildFile; fileRef = 55BA91791D76103B008610D7 /* portlistingparse.h */; };
 		55BA917E1D761080008610D7 /* upnpdev.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BA917C1D761080008610D7 /* upnpdev.c */; };
@@ -214,6 +215,7 @@
 		5590A55D20D4F1390001CB58 /* PortMapSwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PortMapSwift.entitlements; sourceTree = "<group>"; };
 		5590A56B20D4F21B0001CB58 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5590A56D20D4F2870001CB58 /* TCMPortMappingAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCMPortMappingAdditions.swift; sourceTree = "<group>"; };
+		55B1CA8B20D57B5E00397B72 /* StatusImageFromMappingStatusValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusImageFromMappingStatusValueTransformer.swift; sourceTree = "<group>"; };
 		55BA91781D76103B008610D7 /* portlistingparse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = portlistingparse.c; sourceTree = "<group>"; };
 		55BA91791D76103B008610D7 /* portlistingparse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = portlistingparse.h; sourceTree = "<group>"; };
 		55BA917C1D761080008610D7 /* upnpdev.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = upnpdev.c; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 			children = (
 				5590A55520D4F1370001CB58 /* AppDelegate.swift */,
 				5590A56D20D4F2870001CB58 /* TCMPortMappingAdditions.swift */,
+				55B1CA8B20D57B5E00397B72 /* StatusImageFromMappingStatusValueTransformer.swift */,
 				5590A55720D4F1390001CB58 /* Assets.xcassets */,
 				5590A55920D4F1390001CB58 /* MainMenu.xib */,
 				5590A55C20D4F1390001CB58 /* Info.plist */,
@@ -940,6 +943,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B1CA8C20D57B5E00397B72 /* StatusImageFromMappingStatusValueTransformer.swift in Sources */,
 				5590A56E20D4F2870001CB58 /* TCMPortMappingAdditions.swift in Sources */,
 				5590A55620D4F1370001CB58 /* AppDelegate.swift in Sources */,
 			);

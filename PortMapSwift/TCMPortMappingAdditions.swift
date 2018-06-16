@@ -56,9 +56,12 @@ extension TCMPortMapping {
 	}
 	
     var dictionaryRepresentation: [String: Any] {
-        return [userInfoMapKey: userInfo ?? NSNull(),
-                privatePortMapKey: localPort,
-				desiredPublicPortMapKey: desiredExternalPort,
-				transportProtocolMapKey: transportProtocol.rawValue]
+		var dict: [String: Any] = [privatePortMapKey: Int(localPort),
+				desiredPublicPortMapKey: Int(desiredExternalPort),
+				transportProtocolMapKey: Int(transportProtocol.rawValue)] 
+		
+		dict[userInfoMapKey] = userInfo
+		
+		return dict
     }
 }

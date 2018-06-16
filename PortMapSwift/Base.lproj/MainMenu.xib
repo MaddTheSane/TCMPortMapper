@@ -25,9 +25,6 @@
                             </menuItem>
                             <menuItem title="Check for Updates…" id="654">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="checkForUpdates:" target="653" id="655"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="236">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
@@ -561,37 +558,37 @@ CA
         </window>
         <customObject id="405" customClass="AppDelegate" customModule="PortMapSwift" customModuleProvider="target">
             <connections>
-                <outlet property="O_UPNPMappingListArrayController" destination="602" id="608"/>
-                <outlet property="O_UPNPTabItemProgressIndicator" destination="629" id="635"/>
-                <outlet property="O_aboutVersionLineTextField" destination="568" id="643"/>
-                <outlet property="O_aboutWindow" destination="562" id="576"/>
-                <outlet property="O_addDescriptionField" destination="440" id="464"/>
-                <outlet property="O_addDesiredField" destination="444" id="462"/>
-                <outlet property="O_addLocalPortField" destination="442" id="463"/>
-                <outlet property="O_addPresetPopupButton" destination="512" id="520"/>
-                <outlet property="O_addProtocolTCPButton" destination="452" id="460"/>
-                <outlet property="O_addProtocolUDPButton" destination="454" id="461"/>
-                <outlet property="O_addReferenceStringField" destination="502" id="521"/>
-                <outlet property="O_addSheetPanel" destination="432" id="465"/>
-                <outlet property="O_currentIPTextField" destination="399" id="407"/>
-                <outlet property="O_dontShowInstructionsAgainButton" destination="548" id="560"/>
-                <outlet property="O_globalProgressIndicator" destination="418" id="419"/>
-                <outlet property="O_instructionalSheetPanel" destination="544" id="561"/>
-                <outlet property="O_invalidDesiredPortView" destination="495" id="498"/>
-                <outlet property="O_invalidLocalPortView" destination="493" id="497"/>
-                <outlet property="O_localIPAddressTextField" destination="618" id="620"/>
-                <outlet property="O_mappingsArrayController" destination="406" id="410"/>
-                <outlet property="O_portMappingsTableView" destination="378" id="422"/>
-                <outlet property="O_progressIndictatorTabItem" destination="627" id="634"/>
-                <outlet property="O_refreshButton" destination="403" id="421"/>
-                <outlet property="O_replacedReferenceStringTextField" destination="522" id="528"/>
-                <outlet property="O_showUPNPMappingListWindow" destination="580" id="613"/>
-                <outlet property="O_showUPNPMappingTableButton" destination="610" id="621"/>
-                <outlet property="O_taglineTextField" destination="401" id="408"/>
-                <outlet property="O_upnpMappingListTabItem" destination="623" id="633"/>
+                <outlet property="UPNPMappingListArrayController" destination="602" id="608"/>
+                <outlet property="UPNPTabItemProgressIndicator" destination="629" id="635"/>
+                <outlet property="aboutVersionLineTextField" destination="568" id="643"/>
+                <outlet property="aboutWindow" destination="562" id="576"/>
+                <outlet property="addDescriptionField" destination="440" id="464"/>
+                <outlet property="addDesiredField" destination="444" id="462"/>
+                <outlet property="addLocalPortField" destination="442" id="463"/>
+                <outlet property="addPresetPopupButton" destination="512" id="520"/>
+                <outlet property="addProtocolTCPButton" destination="452" id="460"/>
+                <outlet property="addProtocolUDPButton" destination="454" id="461"/>
+                <outlet property="addReferenceStringField" destination="502" id="521"/>
+                <outlet property="addSheetPanel" destination="432" id="465"/>
+                <outlet property="currentIPTextField" destination="399" id="407"/>
+                <outlet property="dontShowInstructionsAgainButton" destination="548" id="560"/>
+                <outlet property="globalProgressIndicator" destination="418" id="419"/>
+                <outlet property="instructionalSheetPanel" destination="544" id="561"/>
+                <outlet property="invalidDesiredPortView" destination="495" id="498"/>
+                <outlet property="invalidLocalPortView" destination="493" id="497"/>
+                <outlet property="localIPAddressTextField" destination="618" id="620"/>
+                <outlet property="mappingsArrayController" destination="406" id="410"/>
+                <outlet property="portMappingsTableView" destination="378" id="422"/>
+                <outlet property="progressIndictatorTabItem" destination="627" id="634"/>
+                <outlet property="refreshButton" destination="403" id="421"/>
+                <outlet property="replacedReferenceStringTextField" destination="522" id="528"/>
+                <outlet property="showUPNPMappingListWindow" destination="580" id="613"/>
+                <outlet property="showUPNPMappingTableButton" destination="610" id="621"/>
+                <outlet property="taglineTextField" destination="401" id="408"/>
+                <outlet property="upnpMappingListTabItem" destination="623" id="633"/>
             </connections>
         </customObject>
-        <arrayController id="406" userLabel="PortMappingsController">
+        <arrayController id="406" userLabel="Port Mappings Controller">
             <declaredKeys>
                 <string>desiredPort</string>
                 <string>localPort</string>
@@ -609,7 +606,7 @@ CA
                 <string>desiredExternalPort</string>
             </declaredKeys>
         </arrayController>
-        <arrayController editable="NO" selectsInsertedObjects="NO" avoidsEmptySelection="NO" id="602" userLabel="UPNPMappingListController">
+        <arrayController editable="NO" selectsInsertedObjects="NO" avoidsEmptySelection="NO" id="602" userLabel="UPNP Mapping List Controller">
             <declaredKeys>
                 <string>protocol</string>
                 <string>publicPort</string>
@@ -974,7 +971,7 @@ DQ
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <clipView key="contentView" id="PLW-nH-cXX">
                                                 <rect key="frame" x="1" y="0.0" width="598" height="324"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" headerView="586" id="585">
                                                         <rect key="frame" x="0.0" y="0.0" width="598" height="301"/>
@@ -1191,7 +1188,6 @@ Open application bundle for details.</string>
                 </subviews>
             </view>
         </window>
-        <customObject id="653" customClass="SUUpdater"/>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
