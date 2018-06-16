@@ -28,11 +28,3 @@ class StatusImageFromMappingStatusValueTransformer: ValueTransformer {
 		}
 	}
 }
-
-class PortStringFromPublicPortValueTransformer : ValueTransformer {
-	
-}
-
-class ReplacedStringFromPortMappingReferenceStringValueTransformer : ValueTransformer {
-	
-}
