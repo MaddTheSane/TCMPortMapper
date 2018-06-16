@@ -29,6 +29,15 @@
 		5539013F1D7535BD002F8A02 /* TCMUPNPPortMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F2C65BDF0D50B17B00820CAE /* TCMUPNPPortMapper.h */; };
 		553901401D7535C2002F8A02 /* TCMNATPMPPortMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F2C65BE40D50B17B00820CAE /* TCMNATPMPPortMapper.h */; };
 		553901411D7535C6002F8A02 /* NSNotificationCenterThreadingAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = F2C65BE80D50B17B00820CAE /* NSNotificationCenterThreadingAdditions.h */; };
+		5590A55620D4F1370001CB58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590A55520D4F1370001CB58 /* AppDelegate.swift */; };
+		5590A55820D4F1390001CB58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5590A55720D4F1390001CB58 /* Assets.xcassets */; };
+		5590A55B20D4F1390001CB58 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5590A55920D4F1390001CB58 /* MainMenu.xib */; };
+		5590A56120D4F1580001CB58 /* miniupnpc-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31FAE7D30D672D410085867F /* miniupnpc-LICENSE.txt */; };
+		5590A56220D4F1D80001CB58 /* TCMPortMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3180119F0D4DEC8400BE3B28 /* TCMPortMapper.framework */; };
+		5590A56320D4F1D80001CB58 /* TCMPortMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3180119F0D4DEC8400BE3B28 /* TCMPortMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5590A56720D4F1EE0001CB58 /* Presets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2D731E90D5B768300CBD1D8 /* Presets.plist */; };
+		5590A56A20D4F21B0001CB58 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5590A56C20D4F21B0001CB58 /* Localizable.strings */; };
+		5590A56E20D4F2870001CB58 /* TCMPortMappingAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590A56D20D4F2870001CB58 /* TCMPortMappingAdditions.swift */; };
 		55BA917A1D76103B008610D7 /* portlistingparse.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BA91781D76103B008610D7 /* portlistingparse.c */; };
 		55BA917B1D76103B008610D7 /* portlistingparse.h in Headers */ = {isa = PBXBuildFile; fileRef = 55BA91791D76103B008610D7 /* portlistingparse.h */; };
 		55BA917E1D761080008610D7 /* upnpdev.c in Sources */ = {isa = PBXBuildFile; fileRef = 55BA917C1D761080008610D7 /* upnpdev.c */; };
@@ -98,6 +107,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5590A56420D4F1D80001CB58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3180119E0D4DEC8400BE3B28;
+			remoteInfo = TCMPortMapper;
+		};
 		F214E60F0D5F65D300A06962 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -143,6 +159,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		5590A56620D4F1D80001CB58 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5590A56320D4F1D80001CB58 /* TCMPortMapper.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F214E6310D5F662400A06962 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -179,6 +206,14 @@
 		3180154D0D4E08D900BE3B28 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		31FAE7D30D672D410085867F /* miniupnpc-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "miniupnpc-LICENSE.txt"; path = "portmap/miniupnpc-LICENSE.txt"; sourceTree = "<group>"; };
 		553901421D753618002F8A02 /* TCMPortMapper_prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TCMPortMapper_prefix.pch; path = framework/TCMPortMapper_prefix.pch; sourceTree = "<group>"; };
+		5590A55320D4F1370001CB58 /* PortMapSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortMapSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5590A55520D4F1370001CB58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5590A55720D4F1390001CB58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5590A55A20D4F1390001CB58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5590A55C20D4F1390001CB58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5590A55D20D4F1390001CB58 /* PortMapSwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PortMapSwift.entitlements; sourceTree = "<group>"; };
+		5590A56B20D4F21B0001CB58 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5590A56D20D4F2870001CB58 /* TCMPortMappingAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCMPortMappingAdditions.swift; sourceTree = "<group>"; };
 		55BA91781D76103B008610D7 /* portlistingparse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = portlistingparse.c; sourceTree = "<group>"; };
 		55BA91791D76103B008610D7 /* portlistingparse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = portlistingparse.h; sourceTree = "<group>"; };
 		55BA917C1D761080008610D7 /* upnpdev.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = upnpdev.c; sourceTree = "<group>"; };
@@ -296,6 +331,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5590A55020D4F1370001CB58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5590A56220D4F1D80001CB58 /* TCMPortMapper.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F214E5D90D5F5FE600A06962 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -341,6 +384,7 @@
 				F2C65FFF0D50C2D100820CAE /* Port Map.app */,
 				F214E5DB0D5F5FE600A06962 /* NATEcho.app */,
 				F21B76970DB73CFC00942BC0 /* upnpc-static */,
+				5590A55320D4F1370001CB58 /* PortMapSwift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -352,6 +396,7 @@
 				F214E5F10D5F600B00A06962 /* NATEcho.app */,
 				F2C6600B0D50C34500820CAE /* Port Map */,
 				F2C65BDD0D50B16100820CAE /* TCMPortMapper.framework */,
+				5590A55420D4F1370001CB58 /* PortMapSwift */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -371,6 +416,21 @@
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
+		};
+		5590A55420D4F1370001CB58 /* PortMapSwift */ = {
+			isa = PBXGroup;
+			children = (
+				5590A55520D4F1370001CB58 /* AppDelegate.swift */,
+				5590A56D20D4F2870001CB58 /* TCMPortMappingAdditions.swift */,
+				5590A55720D4F1390001CB58 /* Assets.xcassets */,
+				5590A55920D4F1390001CB58 /* MainMenu.xib */,
+				5590A55C20D4F1390001CB58 /* Info.plist */,
+				5590A55D20D4F1390001CB58 /* PortMapSwift.entitlements */,
+				5590A56C20D4F21B0001CB58 /* Localizable.strings */,
+			);
+			path = PortMapSwift;
+			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		F214E5F10D5F600B00A06962 /* NATEcho.app */ = {
 			isa = PBXGroup;
@@ -650,6 +710,25 @@
 			productReference = 3180119F0D4DEC8400BE3B28 /* TCMPortMapper.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		5590A55220D4F1370001CB58 /* PortMapSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5590A56020D4F13A0001CB58 /* Build configuration list for PBXNativeTarget "PortMapSwift" */;
+			buildPhases = (
+				5590A54F20D4F1370001CB58 /* Sources */,
+				5590A55020D4F1370001CB58 /* Frameworks */,
+				5590A55120D4F1370001CB58 /* Resources */,
+				5590A56620D4F1D80001CB58 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5590A56520D4F1D80001CB58 /* PBXTargetDependency */,
+			);
+			name = PortMapSwift;
+			productName = PortMapSwift;
+			productReference = 5590A55320D4F1370001CB58 /* PortMapSwift.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F214E5DA0D5F5FE600A06962 /* NATEcho */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F214E5E00D5F5FE800A06962 /* Build configuration list for PBXNativeTarget "NATEcho" */;
@@ -711,7 +790,19 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
+				TargetAttributes = {
+					5590A55220D4F1370001CB58 = {
+						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Port Map" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -719,6 +810,7 @@
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* PortMapper */;
 			projectDirPath = "";
@@ -731,6 +823,7 @@
 				F246036A0DB4B45900C509E9 /* Create TCMPortMapper Release Zip */,
 				F24603720DB4B4B600C509E9 /* Create Release Zips */,
 				F21B76960DB73CFC00942BC0 /* UPnP Command Line Debug Tool */,
+				5590A55220D4F1370001CB58 /* PortMapSwift */,
 			);
 		};
 /* End PBXProject section */
@@ -741,6 +834,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				F24602F70DB4AFE300C509E9 /* OUItoCompany.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5590A55120D4F1370001CB58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5590A56A20D4F21B0001CB58 /* Localizable.strings in Resources */,
+				5590A55820D4F1390001CB58 /* Assets.xcassets in Resources */,
+				5590A56720D4F1EE0001CB58 /* Presets.plist in Resources */,
+				5590A55B20D4F1390001CB58 /* MainMenu.xib in Resources */,
+				5590A56120D4F1580001CB58 /* miniupnpc-LICENSE.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,6 +936,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5590A54F20D4F1370001CB58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5590A56E20D4F2870001CB58 /* TCMPortMappingAdditions.swift in Sources */,
+				5590A55620D4F1370001CB58 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F214E5D80D5F5FE600A06962 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -874,6 +988,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5590A56520D4F1D80001CB58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3180119E0D4DEC8400BE3B28 /* TCMPortMapper */;
+			targetProxy = 5590A56420D4F1D80001CB58 /* PBXContainerItemProxy */;
+		};
 		F214E6100D5F65D300A06962 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3180119E0D4DEC8400BE3B28 /* TCMPortMapper */;
@@ -907,6 +1026,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5590A55920D4F1390001CB58 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5590A55A20D4F1390001CB58 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		5590A56C20D4F21B0001CB58 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5590A56B20D4F21B0001CB58 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		F214E5FB0D5F62F700A06962 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -946,6 +1081,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
@@ -976,6 +1112,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1001,6 +1138,81 @@
 				PRODUCT_BUNDLE_IDENTIFIER = signsmart.TCMPortMapper;
 				PRODUCT_NAME = TCMPortMapper;
 				USER_HEADER_SEARCH_PATHS = framework;
+			};
+			name = Release;
+		};
+		5590A55E20D4F1390001CB58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = PortMapSwift/PortMapSwift.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = PortMapSwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.MaddTheSane.PortMapSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		5590A55F20D4F1390001CB58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = PortMapSwift/PortMapSwift.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = PortMapSwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.MaddTheSane.PortMapSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1323,6 +1535,15 @@
 			buildConfigurations = (
 				318011A10D4DEC8500BE3B28 /* Debug */,
 				318011A20D4DEC8500BE3B28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5590A56020D4F13A0001CB58 /* Build configuration list for PBXNativeTarget "PortMapSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5590A55E20D4F1390001CB58 /* Debug */,
+				5590A55F20D4F1390001CB58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

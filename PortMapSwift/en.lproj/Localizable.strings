@@ -1,0 +1,25 @@
+/* 
+  Localizable.strings
+  Port Map
+
+  Created by C.W. Betts on 6/16/18.
+  
+*/
+
+/* port map window title */
+"Port Map" = "Port Map";
+"Port Map on %@" = "Port Map on %@";
+
+
+"NAT-PMP Howto URL" = "http://support.apple.com/kb/HT1552";
+"Port Map URL" = "http://www.codingmonkeys.de/portmap/";
+"TCMPortMapper URL" = "http://code.google.com/p/tcmportmapper/";
+"Bugtracker URL" = "http://code.google.com/p/tcmportmapper/issues/entry";
+
+/* status messages */
+"Router incompatible." = "Router incompatible.";
+"Can't find router." = "Can't find router.";
+"Searching..." = "Searching…";
+"Stopped" = "Stopped";
+"No Router" = "No Router";
+"No external Address." = "No external Address.";
