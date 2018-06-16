@@ -1,6 +1,6 @@
 
 #import "TCMStatusImageFromMappingStatusValueTransformer.h"
-
+#import <Cocoa/Cocoa.h>
 
 @implementation TCMStatusImageFromMappingStatusValueTransformer
 + (Class)transformedValueClass {

@@ -6,7 +6,7 @@
 //  Some rights reserved: <http://opensource.org/licenses/mit-license.php> 
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 
 @interface TCMStatusImageFromMappingStatusValueTransformer : NSValueTransformer {
