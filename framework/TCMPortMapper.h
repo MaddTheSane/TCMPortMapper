@@ -66,11 +66,11 @@ typedef NS_OPTIONS(unsigned char, TCMPortMappingTransportProtocol) {
 
 @interface TCMPortMapper : NSObject
 
-@property (class, readonly, strong) TCMPortMapper *sharedInstance;
+@property (class, readonly, strong) TCMPortMapper *sharedInstance NS_SWIFT_NAME(shared);
 + (nullable NSString *)manufacturerForHardwareAddress:(NSString *)aMACAddress;
 + (NSString *)sizereducableHashOfString:(NSString *)inString;
 
-- (instancetype)init NS_SWIFT_UNAVAILABLE("Use TCMPortMapping.sharedInstance instead");
+- (instancetype)init NS_SWIFT_UNAVAILABLE("Use `TCMPortMapping.shared` instead");
 
 @property (readonly, copy) NSSet<TCMPortMapping*> *portMappings;
 @property (readonly, strong) NSMutableSet<TCMPortMapping*> *removeMappingQueue;
