@@ -586,6 +586,7 @@ CA
                 <outlet property="showUPNPMappingTableButton" destination="610" id="621"/>
                 <outlet property="taglineTextField" destination="401" id="408"/>
                 <outlet property="upnpMappingListTabItem" destination="623" id="633"/>
+                <outlet property="window" destination="371" id="cuI-eg-GdC"/>
             </connections>
         </customObject>
         <arrayController id="406" userLabel="Port Mappings Controller">

@@ -98,11 +98,11 @@ typedef NS_OPTIONS(unsigned char, TCMPortMappingTransportProtocol) {
 - (void)hashUserID:(NSString *)aUserIDToHash;
 
 @property (readonly, copy, nullable) NSString *externalIPAddress;
-@property (readonly, copy) NSString *localIPAddress;
+@property (readonly, copy, nullable) NSString *localIPAddress;
 @property (readonly, copy) NSString *localBonjourHostName;
 @property (copy) TCMPortMapProtocol mappingProtocol;
 @property (copy, nullable) NSString *routerName;
-@property (readonly, copy) NSString *routerIPAddress;
+@property (readonly, copy, nullable) NSString *routerIPAddress;
 @property (readonly, copy, nullable) NSString *routerHardwareAddress;
 
 // private accessors

@@ -695,8 +695,8 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
 }
 
 - (NSString *)routerIPAddress {
-    SCDynamicStoreRef dynRef = SCDynamicStoreCreate(kCFAllocatorSystemDefault, (CFStringRef)@"TCMPortMapper", NULL, NULL); 
-    NSDictionary *scobjects = (NSDictionary *)CFBridgingRelease(SCDynamicStoreCopyValue(dynRef,(CFStringRef)@"State:/Network/Global/IPv4" ));
+    SCDynamicStoreRef dynRef = SCDynamicStoreCreate(kCFAllocatorSystemDefault, CFSTR("TCMPortMapper"), NULL, NULL);
+    NSDictionary *scobjects = (NSDictionary *)CFBridgingRelease(SCDynamicStoreCopyValue(dynRef, CFSTR("State:/Network/Global/IPv4") ));
     
     NSString *routerIPAddress = (NSString *)[scobjects objectForKey:(NSString *)kSCPropNetIPv4Router];
     routerIPAddress = [routerIPAddress copy];
