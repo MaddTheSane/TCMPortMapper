@@ -22,7 +22,6 @@ var replacedStringFromPortMappingReferenceString: NSValueTransformerName {
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
 	@IBOutlet weak var window: NSWindow!
 	@IBOutlet weak var currentIPTextField: NSTextField!
 	@IBOutlet weak var taglineTextField: NSTextField!
@@ -366,10 +365,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	override func controlTextDidChange(_ obj: Notification) {
-		if let fieldEditor = obj.userInfo?["NSFieldEditor"] as? NSTextView {
-			if fieldEditor === addLocalPortField.currentEditor() {
-				addDesiredField.stringValue = addLocalPortField.stringValue
-			}
+		if let fieldEditor = obj.userInfo?["NSFieldEditor"] as? NSTextView,
+			fieldEditor === addLocalPortField.currentEditor() {
+			addDesiredField.stringValue = addLocalPortField.stringValue
 		}
 		let validPortRange = 0..<Int(UInt16.max)
 		invalidLocalPortView.isHidden = !validPortRange.contains(addLocalPortField.integerValue)
