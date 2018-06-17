@@ -254,7 +254,7 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
 }
 
 - (NSString *)localBonjourHostName {
-    SCDynamicStoreRef dynRef = SCDynamicStoreCreate(kCFAllocatorSystemDefault, (CFStringRef)@"TCMPortMapper", NULL, NULL); 
+    SCDynamicStoreRef dynRef = SCDynamicStoreCreate(kCFAllocatorSystemDefault, CFSTR("TCMPortMapper"), NULL, NULL);
     NSString *hostname = (NSString *)CFBridgingRelease(SCDynamicStoreCopyLocalHostName(dynRef));
     CFRelease(dynRef);
     return [hostname stringByAppendingString:@".local"];
@@ -262,15 +262,15 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
 
 - (void)updateLocalIPAddress {
     NSString *routerAddress = [self routerIPAddress];
-    SCDynamicStoreRef dynRef = SCDynamicStoreCreate(kCFAllocatorSystemDefault, (CFStringRef)@"TCMPortMapper", NULL, NULL); 
-    NSDictionary *scobjects = (NSDictionary *)CFBridgingRelease(SCDynamicStoreCopyValue(dynRef,(CFStringRef)@"State:/Network/Global/IPv4" )); 
+    SCDynamicStoreRef dynRef = SCDynamicStoreCreate(kCFAllocatorSystemDefault, CFSTR("TCMPortMapper"), NULL, NULL);
+    NSDictionary *scobjects = (NSDictionary *)CFBridgingRelease(SCDynamicStoreCopyValue(dynRef, CFSTR("State:/Network/Global/IPv4") ));
     
     NSString *ipv4Key = [NSString stringWithFormat:@"State:/Network/Interface/%@/IPv4", [scobjects objectForKey:(NSString *)kSCDynamicStorePropNetPrimaryInterface]];
     
     CFRelease(dynRef);
     
-    dynRef = SCDynamicStoreCreate(kCFAllocatorSystemDefault, (CFStringRef)@"TCMPortMapper", NULL, NULL); 
-    scobjects = (NSDictionary *)CFBridgingRelease(SCDynamicStoreCopyValue(dynRef,(CFStringRef)ipv4Key)); 
+    dynRef = SCDynamicStoreCreate(kCFAllocatorSystemDefault, CFSTR("TCMPortMapper"), NULL, NULL); 
+    scobjects = (NSDictionary *)CFBridgingRelease(SCDynamicStoreCopyValue(dynRef,(CFStringRef)ipv4Key));
     
 //        NSLog(@"%s scobjects:%@",__FUNCTION__,scobjects);
     NSArray *IPAddresses = (NSArray *)[scobjects objectForKey:(NSString *)kSCPropNetIPv4Addresses];
