@@ -243,7 +243,6 @@
 		F2301B030D685C1B00728699 /* miniupnpc_declspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miniupnpc_declspec.h; sourceTree = "<group>"; };
 		F2301B040D685C1B00728699 /* igd_desc_parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = igd_desc_parse.c; sourceTree = "<group>"; };
 		F2301B050D685C1B00728699 /* igd_desc_parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = igd_desc_parse.h; sourceTree = "<group>"; };
-		F2301B070D685C1B00728699 /* libminiupnpc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libminiupnpc.a; sourceTree = "<group>"; };
 		F2301B080D685C1B00728699 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F2301B090D685C1B00728699 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		F2301B0A0D685C1B00728699 /* Makefile.mingw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.mingw; sourceTree = "<group>"; };
@@ -478,7 +477,6 @@
 				F2301B030D685C1B00728699 /* miniupnpc_declspec.h */,
 				F2301B040D685C1B00728699 /* igd_desc_parse.c */,
 				F2301B050D685C1B00728699 /* igd_desc_parse.h */,
-				F2301B070D685C1B00728699 /* libminiupnpc.a */,
 				F2301B080D685C1B00728699 /* LICENSE */,
 				F2301B090D685C1B00728699 /* Makefile */,
 				F2301B0A0D685C1B00728699 /* Makefile.mingw */,
