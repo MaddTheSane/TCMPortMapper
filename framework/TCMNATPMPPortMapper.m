@@ -128,7 +128,7 @@ static void readData (
                 NSLog(@"Could not setsockopt to SO_REUSEPORT: %d / %s", errno, strerror(errno));
             }
             
-            CFDataRef addressData = NULL;
+            NSData *addressData = nil;
             struct sockaddr_in socketAddress;
             
             bzero(&socketAddress, sizeof(struct sockaddr_in));
@@ -137,12 +137,12 @@ static void readData (
             socketAddress.sin_port = htons(5350);
             socketAddress.sin_addr.s_addr = inet_addr("224.0.0.1");
             
-            addressData = CFDataCreate(kCFAllocatorDefault, (UInt8 *)&socketAddress, sizeof(struct sockaddr_in));
-            if (addressData == NULL) {
+            addressData = [NSData dataWithBytes:&socketAddress length:sizeof(struct sockaddr_in)];
+            if (addressData == nil) {
                 NSLog(@"Could not create addressData for NAT-PMP external ip address change notification listening");
             } else {
                     
-                CFSocketError err = CFSocketSetAddress(_externalAddressChangeListeningSocket, addressData);
+                CFSocketError err = CFSocketSetAddress(_externalAddressChangeListeningSocket, (CFDataRef)addressData);
                 if (err != kCFSocketSuccess) {
                     NSLog(@"%s could not set address on socket",__FUNCTION__);
                 } else {
@@ -154,10 +154,8 @@ static void readData (
                     	CFRelease(runLoopSource);
                     }
                 }
-                
-                CFRelease(addressData);
             }
-            addressData = NULL;
+            addressData = nil;
 
         } else {
             NSLog(@"Could not create listening socket for NAT-PMP external ip address change notifications (UDP 224.0.0.1:5350)");
