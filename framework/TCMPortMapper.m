@@ -58,9 +58,9 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
     // private subnets as defined in http://tools.ietf.org/html/rfc1918
     // loopback addresses 127.0.0.1/8 http://tools.ietf.org/html/rfc3330
     // zeroconf/bonjour self assigned addresses 169.254.0.0/16 http://tools.ietf.org/html/rfc3927
-    char *ipAddresses[]  = {"192.168.0.0", "10.0.0.0", "172.16.0.0","127.0.0.1","169.254.0.0"};
-    char *networkMasks[] = {"255.255.0.0","255.0.0.0","255.240.0.0","255.0.0.0","255.255.0.0"};
-    int countOfAddresses=5;
+    const char *ipAddresses[]  = {"192.168.0.0", "10.0.0.0", "172.16.0.0","127.0.0.1","169.254.0.0"};
+    const char *networkMasks[] = {"255.255.0.0","255.0.0.0","255.240.0.0","255.0.0.0","255.255.0.0"};
+    const int countOfAddresses=5;
     int i = 0;
     for (i=0;i<countOfAddresses;i++) {
         in_addr_t subnetmask = inet_addr(networkMasks[i]);
@@ -233,7 +233,7 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
     Boolean success = 0;
     BOOL okay = NO;
     SCNetworkConnectionFlags status = 0;
-    char *name = "www.apple.com";
+    const char *name = "www.apple.com";
     
     SCNetworkReachabilityRef target = SCNetworkReachabilityCreateWithName(NULL, name);
     success = SCNetworkReachabilityGetFlags(target, &status);
