@@ -19,7 +19,7 @@
 
 /// Returns the serial number as an <code>NSString</code>.
 /// It is the caller's responsibility to release the returned \c NSString when done with it.
-static NSString *CopySerialNumber(void) NS_RETURNS_RETAINED;
+static NSString * _Nullable CopySerialNumber(void) NS_RETURNS_RETAINED;
 
 // update port mappings all 30 minutes as a default
 #define UPNP_REFRESH_INTERVAL (30.*60.)
@@ -506,9 +506,9 @@ typedef NS_ENUM(NSInteger, TCMPortMapProtocolStatus) {
 + (NSString *)manufacturerForHardwareAddress:(NSString *)aMACAddress {
     static NSDictionary *hardwareManufacturerDictionary = nil;
     if (hardwareManufacturerDictionary==nil) {
-        NSString *plistPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"OUItoCompany" ofType:@"plist"];
+        NSURL *plistPath = [[NSBundle bundleForClass:[self class]] URLForResource:@"OUItoCompany" withExtension:@"plist"];
         if (plistPath) {
-            hardwareManufacturerDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+            hardwareManufacturerDictionary = [[NSDictionary alloc] initWithContentsOfURL:plistPath];
         } else {
             hardwareManufacturerDictionary = [NSDictionary new];
         }

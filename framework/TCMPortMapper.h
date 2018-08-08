@@ -29,7 +29,7 @@ extern NSNotificationName const TCMPortMappingDidChangeMappingStatusNotification
 typedef NSString *TCMPortMapProtocol NS_TYPED_ENUM;
 
 extern TCMPortMapProtocol const TCMNATPMPPortMapProtocol NS_SWIFT_NAME(NATPMP);
-extern TCMPortMapProtocol const TCMUPNPPortMapProtocol NS_SWIFT_NAME(UPNP);
+extern TCMPortMapProtocol const TCMUPNPPortMapProtocol NS_SWIFT_NAME(UPnP);
 extern TCMPortMapProtocol const TCMNoPortMapProtocol NS_SWIFT_NAME(none);
 
 typedef NS_ENUM(char, TCMPortMappingStatus) {

@@ -57,6 +57,7 @@
     int port = [O_portTextField intValue];
     [I_server setPort:port];
     NSError *error = nil;
+    [O_serverStatusImageView setImage:[NSImage imageNamed:NSImageNameStatusPartiallyAvailable]];
     if ([I_server start:&error]) {
         [O_serverStatusImageView setImage:[NSImage imageNamed:NSImageNameStatusAvailable]];
         [O_serverStatusTextField setStringValue:@"Running"];
@@ -105,8 +106,8 @@
 - (void)TCPServer:(TCPServer *)server didReceiveConnectionFromAddress:(NSData *)addr inputStream:(NSInputStream *)istr outputStream:(NSOutputStream *)ostr {
     NSLog(@"%s",__FUNCTION__);
     [istr setDelegate:self];
-    [istr scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:(id)kCFRunLoopCommonModes];
-    [ostr scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:(id)kCFRunLoopCommonModes];
+    [istr scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    [ostr scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
     [I_streamsArray addObject:istr];
     [I_streamsArray addObject:ostr];
     [istr open];
