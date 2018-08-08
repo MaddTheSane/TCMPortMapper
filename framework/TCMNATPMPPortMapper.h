@@ -11,11 +11,11 @@
 
 #include "natpmp.h"
 
-extern NSString * const TCMNATPMPPortMapperDidFailNotification;
-extern NSString * const TCMNATPMPPortMapperDidGetExternalIPAddressNotification;
-extern NSString * const TCMNATPMPPortMapperDidBeginWorkingNotification;
-extern NSString * const TCMNATPMPPortMapperDidEndWorkingNotification  ;
-extern NSString * const TCMNATPMPPortMapperDidReceiveBroadcastedExternalIPChangeNotification;
+extern NSNotificationName const TCMNATPMPPortMapperDidFailNotification;
+extern NSNotificationName const TCMNATPMPPortMapperDidGetExternalIPAddressNotification;
+extern NSNotificationName const TCMNATPMPPortMapperDidBeginWorkingNotification;
+extern NSNotificationName const TCMNATPMPPortMapperDidEndWorkingNotification  ;
+extern NSNotificationName const TCMNATPMPPortMapperDidReceiveBroadcastedExternalIPChangeNotification;
 
 typedef NS_ENUM(char, TCMPortMappingThreadID) {
     TCMExternalIPThreadID = 0,

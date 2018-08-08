@@ -9,5 +9,5 @@
 
 @interface NSNotificationCenter (NSNotificationCenterThreadingAdditions)
 - (void)postNotificationOnMainThread:(NSNotification *)aNotification;
-- (void)postNotificationOnMainThreadWithName:(NSString *)aName object:(id)anObject;
+- (void)postNotificationOnMainThreadWithName:(NSNotificationName)aName object:(id)anObject;
 @end

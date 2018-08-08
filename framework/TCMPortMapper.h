@@ -70,7 +70,7 @@ typedef NS_OPTIONS(unsigned char, TCMPortMappingTransportProtocol) {
 + (nullable NSString *)manufacturerForHardwareAddress:(NSString *)aMACAddress;
 + (NSString *)sizereducableHashOfString:(NSString *)inString;
 
-- (instancetype)init NS_SWIFT_UNAVAILABLE("Use `TCMPortMapping.shared` instead");
+- (instancetype)init NS_SWIFT_UNAVAILABLE("Use `TCMPortMapper.shared` instead");
 
 @property (readonly, copy) NSSet<TCMPortMapping*> *portMappings;
 @property (readonly, strong) NSMutableSet<TCMPortMapping*> *removeMappingQueue;

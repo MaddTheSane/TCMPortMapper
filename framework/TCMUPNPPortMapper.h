@@ -14,10 +14,10 @@
 #include "upnpcommands.h"
 #include "upnperrors.h"
 
-extern NSString * const TCMUPNPPortMapperDidFailNotification;
-extern NSString * const TCMUPNPPortMapperDidGetExternalIPAddressNotification;
-extern NSString * const TCMUPNPPortMapperDidBeginWorkingNotification;
-extern NSString * const TCMUPNPPortMapperDidEndWorkingNotification;
+extern NSNotificationName const TCMUPNPPortMapperDidFailNotification;
+extern NSNotificationName const TCMUPNPPortMapperDidGetExternalIPAddressNotification;
+extern NSNotificationName const TCMUPNPPortMapperDidBeginWorkingNotification;
+extern NSNotificationName const TCMUPNPPortMapperDidEndWorkingNotification;
 
 @interface TCMUPNPPortMapper : NSObject {
     NSLock *_threadIsRunningLock;
